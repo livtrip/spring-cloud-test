@@ -1,0 +1,45 @@
+version: "2"
+
+#services:
+#  version: "2"
+services:
+  register:
+    image: itmuch/register:0.0.1-SNAPSHOT
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "8761:8761/tcp"
+  gateway:
+    image: itmuch/gateway:0.0.1-SNAPSHOT
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "8768:8768/tcp"
+
+  order-service:
+    image: itmuch/order-service:0.0.1-SNAPSHOT
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "8763:8763/tcp"
+
+  account-service:
+    image: itmuch/account-service:0.0.1-SNAPSHOT
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "8762:8762/tcp"
+
+  commodity-service:
+    image: itmuch/commodity-service:0.0.1-SNAPSHOT
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "8764:8764/tcp"
+
+  payment-service:
+    image: itmuch/payment-service:0.0.1-SNAPSHOT
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "8765:8765/tcp"

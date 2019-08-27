@@ -1,0 +1,71 @@
+server:
+  port: 8762
+# druid
+spring:
+  application:
+    name: account-service
+  datasource:
+    druid:
+      url: jdbc:mysql://111.231.189.44:3306/spring-cloud-usercenter?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: mark2019
+  aop:
+    auto: true
+  redis:
+    database: 0
+    host: 111.231.189.44
+    port: 6379
+    password:
+  freemarker:
+    request-context-attribute: request
+    prefer-file-system-access: false
+    settings.number_format: 0.##
+# mybatis
+mybatis:
+  mapper-locations: classpath*:mybatis/*.xml
+  type-aliases-package: com.itmuch.cloud.study.account.entity
+# eureka
+eureka:
+  instance:
+    hostname: localhost
+    appname: account-service
+    instance-id: account-service:port-8762
+    prefer-ip-address: true
+    health-check-url-path: /health
+  client:
+    service-url:
+       defaultZone: http://111.231.189.44:8761/eureka
+#swagger
+swagger:
+  base-package: com.itmuch.cloud.study.account.controller
+# logging
+logging:
+  level: com.itmuch.cloud.study.account.entity
+  config: classpath:logging-config.xml
+
+# 微信小程序
+wx:
+  mini:
+    app-id: wx19cccd16936e1a91
+    app-secret: 6c91b5af08e39b06b428d8fac333d9c9
+  app:
+    app-id: wx6e1355f89b03fd2e
+    app-secret: 013972cce59f480f6ac0890422f1aefd
+# 阿里云和腾讯云短信配置
+sms:
+  enable: qcloud
+  qcloud:
+    admin-login-template-id: 381839
+    app-id: 1400186792
+    app-key: 31664f74451303e098ca689433477e53
+    bind-phone-template-id: 364423
+    register-template-id: 364423
+    reset-password-template-id: 364423
+  aliyun:
+    accessId: LTAIawEsRQ5noKqG
+    accessKey: mSvqeIm1qyEwaI0AWu2TXTXgYMcqxg
+    admin-login-template-id: 381839
+    bind-phone-template-id: 364423
+    register-template-id: 364423
+    reset-password-template-id: 364423
+    signature: iotechn
