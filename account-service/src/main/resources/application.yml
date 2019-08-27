@@ -69,3 +69,13 @@ sms:
     register-template-id: 364423
     reset-password-template-id: 364423
     signature: iotechn
+# 云从人脸识别接口
+cloudwalk:
+    domain: https://service.cloudwalk.cn
+    secret: b6f4995bfbe34df9ab866ab0ed24c433
+    appid: duoduolicai
+    keyStorePath: keystore.keystore
+    trustStorePath: truststore.truststore
+    password: cloudwalk123456
+    score: 0.70
+    idcardScore: 0.70
