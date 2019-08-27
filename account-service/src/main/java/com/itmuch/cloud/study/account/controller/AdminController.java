@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +30,8 @@ public class AdminController {
     })
     @PostMapping("login")
     public String login(String username, String password, String verifyCode){
-        log.info("-----login----");
+        log.info("管理员后台登陆 userName:{} password:{} verifyCode:{}", username, password, verifyCode);
+
 
         return generateAccessToken();
     }
