@@ -3,6 +3,7 @@ package com.itmuch.cloud.study.account.service.impl;
 import cn.hutool.http.HttpRequest;
 import com.alibaba.fastjson.JSON;
 import com.itmuch.cloud.study.account.bean.dto.IdCardOcrDTO;
+import com.itmuch.cloud.study.account.dao.impl.mapper.UserIdentityInfoMapper;
 import com.itmuch.cloud.study.account.service.IdentityService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -24,6 +25,7 @@ import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -70,7 +72,7 @@ public class IdentityServiceImpl implements IdentityService {
 
     @Override
     public IdCardOcrDTO idCardOcr(String idcardBase64Img) {
-        try{
+        try {
             Map<String, String> paramMap = new HashMap<String, String>();
             Map<String, String> contentMap = new HashMap<String, String>();
             contentMap.put("img", idcardBase64Img);
@@ -89,15 +91,15 @@ public class IdentityServiceImpl implements IdentityService {
 
             StringBuilder requestUrl = new StringBuilder();
             requestUrl.append(cloudwalkDomain + "/cweis/faceRecog/idCardOcr");
-
-//            String resultJson = HttpRequest.post(requestUrl.toString()).body(JSON.toJSONString(paramMap)).execute().body();
-
             String resultJson = executePost(requestUrl.toString(), null, paramMap, null, "UTF-8");
 
             resultJson = decrypt(resultJson, realSecret);
             log.info("retJson={}", resultJson);
 
-        }catch (Exception e){
+            IdCardOcrDTO idCardOcrDTO = JSON.parseObject(resultJson, IdCardOcrDTO.class);
+
+
+        } catch (Exception e) {
             log.error("身份证识别异常 e:{}", e);
         }
 
@@ -154,6 +156,7 @@ public class IdentityServiceImpl implements IdentityService {
         strDes = bytesToHexString(md.digest()); // to HexString
         return strDes;
     }
+
     private String bytesToHexString(byte[] bytes) {
         char[] hexChars = new char[bytes.length * 2];
         for (int j = 0; j < bytes.length; j++) {

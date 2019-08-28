@@ -3,7 +3,7 @@ package com.itmuch.cloud.study.account.controller;
 import cn.hutool.core.collection.CollectionUtil;
 import com.battcn.swagger.properties.ApiDataType;
 import com.battcn.swagger.properties.ApiParamType;
-import com.itmuch.cloud.study.account.bean.request.AccountQO;
+import com.itmuch.cloud.study.account.bean.qo.AccountQO;
 import com.itmuch.cloud.study.account.entity.Account;
 import com.itmuch.cloud.study.account.service.AccountService;
 import com.itmuch.cloud.study.common.base.BaseController;

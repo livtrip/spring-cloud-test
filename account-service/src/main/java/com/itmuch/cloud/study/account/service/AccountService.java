@@ -1,6 +1,6 @@
 package com.itmuch.cloud.study.account.service;
 
-import com.itmuch.cloud.study.account.bean.request.AccountQO;
+import com.itmuch.cloud.study.account.bean.qo.AccountQO;
 import com.itmuch.cloud.study.account.dao.AccountDao;
 import com.itmuch.cloud.study.account.entity.Account;
 import com.itmuch.cloud.study.account.entity.AccountExample;

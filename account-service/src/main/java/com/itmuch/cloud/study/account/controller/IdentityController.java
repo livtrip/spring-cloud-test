@@ -2,11 +2,15 @@ package com.itmuch.cloud.study.account.controller;
 
 import com.battcn.swagger.properties.ApiDataType;
 import com.battcn.swagger.properties.ApiParamType;
+import com.itmuch.cloud.study.account.bean.qo.UserQO;
 import com.itmuch.cloud.study.account.bean.request.IdCardBase64ImgReq;
 import com.itmuch.cloud.study.account.bean.response.IdCardOcrRes;
 import com.itmuch.cloud.study.account.service.IdentityService;
+import com.itmuch.cloud.study.account.service.UserService;
 import com.itmuch.cloud.study.common.base.Result;
 import com.itmuch.cloud.study.common.base.Results;
+import com.itmuch.cloud.study.common.validator.Assert;
+import com.itmuch.cloud.study.common.validator.ValidatorUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -34,6 +38,9 @@ public class IdentityController {
     @Autowired
     private IdentityService identityService;
 
+    @Autowired
+    private UserService userService;
+
 
     @ApiOperation(value = "/idCardOcr",notes = "身份证识别")
     @ApiImplicitParams({
@@ -41,6 +48,8 @@ public class IdentityController {
     })
     @PostMapping("idCardOcr")
     public Result<IdCardOcrRes> idCardOcr(@RequestBody IdCardBase64ImgReq idcardBase64Img){
+        ValidatorUtils.validateEntity(idcardBase64Img);
+        Assert.isTrue(userService.countByCondition(UserQO.builder().id(idcardBase64Img.getUserId()).build()) == 0, "用户不存在");
         identityService.idCardOcr(idcardBase64Img.getIdcardBase64Img());
 
         return Results.newSuccessResult(null);
