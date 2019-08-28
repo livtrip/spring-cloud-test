@@ -1,10 +1,13 @@
 package com.itmuch.cloud.study.account.service.impl;
 
-import cn.hutool.http.HttpRequest;
+import cn.hutool.core.date.DateUnit;
 import com.alibaba.fastjson.JSON;
 import com.itmuch.cloud.study.account.bean.dto.IdCardOcrDTO;
-import com.itmuch.cloud.study.account.dao.impl.mapper.UserIdentityInfoMapper;
+import com.itmuch.cloud.study.account.bean.qo.UserIdentityInfoQO;
+import com.itmuch.cloud.study.account.bean.request.IdCardBase64ImgReq;
+import com.itmuch.cloud.study.account.entity.UserIdentityInfo;
 import com.itmuch.cloud.study.account.service.IdentityService;
+import com.itmuch.cloud.study.account.service.UserIdentityInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.net.util.Base64;
@@ -22,10 +25,10 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
-
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -69,13 +72,16 @@ public class IdentityServiceImpl implements IdentityService {
     @Value("${cloudwalk.idcardScore}")
     private BigDecimal idcardScore;
 
+    @Autowired
+    private UserIdentityInfoService userIdentityInfoService;
+
 
     @Override
-    public IdCardOcrDTO idCardOcr(String idcardBase64Img) {
+    public IdCardOcrDTO idCardOcr(IdCardBase64ImgReq idCardBase64ImgReq) {
         try {
             Map<String, String> paramMap = new HashMap<String, String>();
             Map<String, String> contentMap = new HashMap<String, String>();
-            contentMap.put("img", idcardBase64Img);
+            contentMap.put("img", idCardBase64ImgReq.getIdcardBase64Img());
             String content = JSON.toJSONString(contentMap);
 
             String realSecret = secret.toUpperCase().substring(8, 24);
@@ -97,7 +103,24 @@ public class IdentityServiceImpl implements IdentityService {
             log.info("retJson={}", resultJson);
 
             IdCardOcrDTO idCardOcrDTO = JSON.parseObject(resultJson, IdCardOcrDTO.class);
+            Integer count =  userIdentityInfoService.countByCondition(UserIdentityInfoQO.builder().userId(idCardBase64ImgReq.getUserId()).build());
+            //不存在身份认证信息则新增，存在则不改变
+            if(count == 0){
+                UserIdentityInfo userIdentityInfo = new UserIdentityInfo();
+                if(idCardOcrDTO.getType() == 1){
+                    //正面照信息
+                    userIdentityInfo.setIdentityAddress(idCardOcrDTO.getAddress());
+                    userIdentityInfo.setBirthday(idCardOcrDTO.getBirthday());
+                    userIdentityInfo.setIdentityId(idCardOcrDTO.getCId());
+                    userIdentityInfo.setRealName(idCardOcrDTO.getCName());
+                    userIdentityInfo.setSex(idCardOcrDTO.getSex().equals("男")?1:0);
+                }else{
+                    String startDate = idCardOcrDTO.getValiddate1();
 
+//                    userIdentityInfo.setStartDate();
+                }
+
+            }
 
         } catch (Exception e) {
             log.error("身份证识别异常 e:{}", e);

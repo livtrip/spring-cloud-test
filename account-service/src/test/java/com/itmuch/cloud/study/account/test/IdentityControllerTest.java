@@ -29,13 +29,14 @@ public class IdentityControllerTest {
 
     @Test
     public void idCardOcr(){
-        String path1 = "/Users/mark1xie/workplace/trj/ddyd/target/classes/static/images/test.jpg";
-        String path2 = "/Users/markxrrl/workspace-cloud/spring-cloud-test/account-service/src/main/resources/static/test.jpg";
+        String path1 = "/Users/mark1xie/workspce-trj/trj/ddyd/src/main/resources/static/images/test.jpg";
+//        String path2 = "/Users/markxrrl/workspace-cloud/spring-cloud-test/account-service/src/main/resources/static/test.jpg";
 
-        String faceImg = ImgUtil.getBase64Img(path2);
+        String faceImg = ImgUtil.getBase64Img(path1);
         System.out.println(faceImg);
         IdCardBase64ImgReq idCardBase64ImgReq = new IdCardBase64ImgReq();
         idCardBase64ImgReq.setIdcardBase64Img(faceImg);
+        idCardBase64ImgReq.setUserId(1L);
         identityController.idCardOcr(idCardBase64ImgReq);
     }
 }

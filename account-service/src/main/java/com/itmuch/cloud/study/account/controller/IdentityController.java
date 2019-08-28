@@ -50,7 +50,7 @@ public class IdentityController {
     public Result<IdCardOcrRes> idCardOcr(@RequestBody IdCardBase64ImgReq idcardBase64Img){
         ValidatorUtils.validateEntity(idcardBase64Img);
         Assert.isTrue(userService.countByCondition(UserQO.builder().id(idcardBase64Img.getUserId()).build()) == 0, "用户不存在");
-        identityService.idCardOcr(idcardBase64Img.getIdcardBase64Img());
+        identityService.idCardOcr(idcardBase64Img);
 
         return Results.newSuccessResult(null);
     }
