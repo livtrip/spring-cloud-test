@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/rest/identity")
-@Api(tags = "1.1", description = "身份认证服务", value = "身份认证服务")
+@Api(tags = "1.2", description = "身份认证服务", value = "身份认证服务")
 @Slf4j
 public class IdentityController {
 
