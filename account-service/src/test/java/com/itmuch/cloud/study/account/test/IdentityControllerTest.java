@@ -1,6 +1,7 @@
 package com.itmuch.cloud.study.account.test;
 
 import com.itmuch.cloud.study.account.AccountApplication;
+import com.itmuch.cloud.study.account.bean.request.IdCardBase64ImgReq;
 import com.itmuch.cloud.study.account.controller.IdentityController;
 import com.itmuch.cloud.study.common.util.ImgUtil;
 import org.junit.Test;
@@ -28,9 +29,10 @@ public class IdentityControllerTest {
 
     @Test
     public void idCardOcr(){
-
-
         String faceImg = ImgUtil.getBase64Img("/Users/mark1xie/workplace/trj/ddyd/target/classes/static/images/test.jpg");
         System.out.println(faceImg);
+        IdCardBase64ImgReq idCardBase64ImgReq = new IdCardBase64ImgReq();
+        idCardBase64ImgReq.setIdcardBase64Img(faceImg);
+        identityController.idCardOcr(idCardBase64ImgReq);
     }
 }

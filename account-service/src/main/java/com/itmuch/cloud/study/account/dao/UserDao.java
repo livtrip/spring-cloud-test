@@ -8,7 +8,7 @@ import java.util.List;
 public interface UserDao {
     int insert(User record);
 
-    int save(User record);
+    Long save(User record);
 
     int deleteByExample(UserExample example);
 

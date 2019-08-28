@@ -4,6 +4,7 @@ import com.battcn.swagger.properties.ApiDataType;
 import com.battcn.swagger.properties.ApiParamType;
 import com.itmuch.cloud.study.account.bean.request.IdCardBase64ImgReq;
 import com.itmuch.cloud.study.account.bean.response.IdCardOcrRes;
+import com.itmuch.cloud.study.account.service.IdentityService;
 import com.itmuch.cloud.study.common.base.Result;
 import com.itmuch.cloud.study.common.base.Results;
 import io.swagger.annotations.Api;
@@ -11,6 +12,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +31,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class IdentityController {
 
+    @Autowired
+    private IdentityService identityService;
+
 
     @ApiOperation(value = "/idCardOcr",notes = "身份证识别")
     @ApiImplicitParams({
@@ -36,7 +41,7 @@ public class IdentityController {
     })
     @PostMapping("idCardOcr")
     public Result<IdCardOcrRes> idCardOcr(@RequestBody IdCardBase64ImgReq idcardBase64Img){
-
+        identityService.idCardOcr(idcardBase64Img.getIdcardBase64Img());
 
         return Results.newSuccessResult(null);
     }

@@ -76,7 +76,7 @@ public class IdentityServiceImpl implements IdentityService {
             log.info("retJson={}", resultJson);
 
         }catch (Exception e){
-            log.error("身份认证 e:{}", e);
+            log.error("身份证识别异常 e:{}", e);
         }
 
         return null;
