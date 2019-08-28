@@ -29,7 +29,10 @@ public class IdentityControllerTest {
 
     @Test
     public void idCardOcr(){
-        String faceImg = ImgUtil.getBase64Img("/Users/mark1xie/workplace/trj/ddyd/target/classes/static/images/test.jpg");
+        String path1 = "/Users/mark1xie/workplace/trj/ddyd/target/classes/static/images/test.jpg";
+        String path2 = "/Users/markxrrl/workspace-cloud/spring-cloud-test/account-service/src/main/resources/static/test.jpg";
+
+        String faceImg = ImgUtil.getBase64Img(path2);
         System.out.println(faceImg);
         IdCardBase64ImgReq idCardBase64ImgReq = new IdCardBase64ImgReq();
         idCardBase64ImgReq.setIdcardBase64Img(faceImg);
