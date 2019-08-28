@@ -7,13 +7,32 @@ import com.itmuch.cloud.study.account.service.IdentityService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.net.util.Base64;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.ssl.SSLContextBuilder;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import javax.net.ssl.SSLContext;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.security.KeyStore;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
@@ -71,7 +90,10 @@ public class IdentityServiceImpl implements IdentityService {
             StringBuilder requestUrl = new StringBuilder();
             requestUrl.append(cloudwalkDomain + "/cweis/faceRecog/idCardOcr");
 
-            String resultJson = HttpRequest.post(requestUrl.toString()).body(JSON.toJSONString(paramMap)).execute().body();
+//            String resultJson = HttpRequest.post(requestUrl.toString()).body(JSON.toJSONString(paramMap)).execute().body();
+
+            String resultJson = executePost(requestUrl.toString(), null, paramMap, null, "UTF-8");
+
             resultJson = decrypt(resultJson, realSecret);
             log.info("retJson={}", resultJson);
 
@@ -162,5 +184,78 @@ public class IdentityServiceImpl implements IdentityService {
             srcList = null;
         }
         return signature;
+    }
+
+    private String executePost(String url, String postData, Map<String, String> paraMap, Map<String, String> reqHeadMap, String encodeCharset) {
+        String responseBody = null;
+        CloseableHttpClient client = null;
+        HttpPost post = null;
+
+        try {
+            // 创建HttpClient客户端
+
+            KeyStore truststore = KeyStore.getInstance(KeyStore.getDefaultType());
+
+            FileInputStream truststoreFile = new FileInputStream(new ClassPathResource(keyStorePath).getFile());
+
+            truststore.load(truststoreFile, password.toCharArray());
+
+            SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(truststore, new TrustSelfSignedStrategy()).build();
+
+            client = HttpClients.custom().setSslcontext(sslContext).setSSLHostnameVerifier(new NoopHostnameVerifier()).build();
+
+            post = new HttpPost(url);
+            // 设定头部信息
+            if (reqHeadMap != null) {
+                for (String key : reqHeadMap.keySet()) {
+                    post.addHeader(key, reqHeadMap.get(key));
+                }
+            }
+
+            if (!StringUtils.isEmpty(postData)) {
+                post.setEntity(new StringEntity(postData, encodeCharset == null ? "UTF-8" : encodeCharset));
+            } else {
+                if (paraMap != null) {
+                    List<NameValuePair> formParams = new ArrayList<NameValuePair>();
+                    for (Map.Entry<String, String> entry : paraMap.entrySet()) {
+                        formParams.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+                    }
+                    post.setEntity(new UrlEncodedFormEntity(formParams, encodeCharset == null ? "UTF-8" : encodeCharset));
+
+                }
+            }
+            CloseableHttpResponse response = client.execute(post);
+            int responseCode = response.getStatusLine().getStatusCode();
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                if (responseCode == HttpStatus.SC_OK) {
+                    if (entity != null) {
+                        responseBody = EntityUtils.toString(entity, "UTF-8");
+                    }
+                } else if (response.getStatusLine().getStatusCode() == HttpStatus.SC_NOT_FOUND) {
+                    return null;
+                }
+            }
+
+            if (StringUtils.isNotBlank(responseBody)) {
+                return responseBody;
+            }
+        } catch (Exception e) {
+            log.error("Error occurred when send HttpPost: " + url, e);
+        } finally {
+            if (post != null && !post.isAborted()) {
+                post.abort();
+            }
+            post.releaseConnection();
+
+            if (client != null) {
+                try {
+                    client.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return responseBody;
     }
 }
