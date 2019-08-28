@@ -4,7 +4,6 @@ import com.itmuch.cloud.study.account.dao.UserDao;
 import com.itmuch.cloud.study.account.dao.impl.mapper.UserMapper;
 import com.itmuch.cloud.study.account.entity.User;
 import com.itmuch.cloud.study.account.entity.UserExample;
-import com.itmuch.cloud.study.common.base.AbstractBaseJdbc;
 import com.itmuch.cloud.study.common.util.Page;
 import com.itmuch.cloud.study.common.util.PageUtil;
 import java.util.List;
@@ -12,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserDaoImpl extends AbstractBaseJdbc implements UserDao {
+public class UserDaoImpl implements UserDao {
     @Autowired
     private UserMapper userMapper;
 
@@ -20,9 +19,8 @@ public class UserDaoImpl extends AbstractBaseJdbc implements UserDao {
         return this.userMapper.insert(record);
     }
 
-    public Long save(User record) {
-         this.userMapper.insertSelective(record);
-         return  getLastId();
+    public int save(User record) {
+        return this.userMapper.insertSelective(record);
     }
 
     public int deleteByExample(UserExample example) {

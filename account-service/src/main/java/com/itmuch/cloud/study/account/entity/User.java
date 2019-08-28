@@ -24,13 +24,11 @@ public class User implements Serializable {
 
     private String phone;
 
-    private String identityId;
+    private Integer identityAuth;
 
-    private String identityAddress;
+    private Integer faceAuth;
 
     private Integer loginType;
-
-    private String birthday;
 
     private String lastLoginIp;
 
@@ -124,20 +122,20 @@ public class User implements Serializable {
         this.phone = phone == null ? null : phone.trim();
     }
 
-    public String getIdentityId() {
-        return identityId;
+    public Integer getIdentityAuth() {
+        return identityAuth;
     }
 
-    public void setIdentityId(String identityId) {
-        this.identityId = identityId == null ? null : identityId.trim();
+    public void setIdentityAuth(Integer identityAuth) {
+        this.identityAuth = identityAuth;
     }
 
-    public String getIdentityAddress() {
-        return identityAddress;
+    public Integer getFaceAuth() {
+        return faceAuth;
     }
 
-    public void setIdentityAddress(String identityAddress) {
-        this.identityAddress = identityAddress == null ? null : identityAddress.trim();
+    public void setFaceAuth(Integer faceAuth) {
+        this.faceAuth = faceAuth;
     }
 
     public Integer getLoginType() {
@@ -146,14 +144,6 @@ public class User implements Serializable {
 
     public void setLoginType(Integer loginType) {
         this.loginType = loginType;
-    }
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday == null ? null : birthday.trim();
     }
 
     public String getLastLoginIp() {
@@ -212,10 +202,9 @@ public class User implements Serializable {
         sb.append(", openId=").append(openId);
         sb.append(", unionId=").append(unionId);
         sb.append(", phone=").append(phone);
-        sb.append(", identityId=").append(identityId);
-        sb.append(", identityAddress=").append(identityAddress);
+        sb.append(", identityAuth=").append(identityAuth);
+        sb.append(", faceAuth=").append(faceAuth);
         sb.append(", loginType=").append(loginType);
-        sb.append(", birthday=").append(birthday);
         sb.append(", lastLoginIp=").append(lastLoginIp);
         sb.append(", createPerson=").append(createPerson);
         sb.append(", createTime=").append(createTime);
