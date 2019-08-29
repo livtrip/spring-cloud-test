@@ -24,7 +24,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/rest/account")
-@Api(tags = "1.1", description = "账户服务", value = "账户服务")
+@Api(description = "账户服务", value = "账户服务")
 @Slf4j
 public class AccountController extends BaseController {
 
