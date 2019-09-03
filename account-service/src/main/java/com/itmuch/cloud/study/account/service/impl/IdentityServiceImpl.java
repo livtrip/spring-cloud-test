@@ -55,6 +55,8 @@ public class IdentityServiceImpl implements IdentityService {
 
     private static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
 
+    private final static  Integer FRONT = 1;
+
     @Value("${cloudwalk.domain}")
     private String cloudwalkDomain;
     @Value("${cloudwalk.appid}")
@@ -104,22 +106,12 @@ public class IdentityServiceImpl implements IdentityService {
 
             IdCardOcrDTO idCardOcrDTO = JSON.parseObject(resultJson, IdCardOcrDTO.class);
             Integer count =  userIdentityInfoService.countByCondition(UserIdentityInfoQO.builder().userId(idCardBase64ImgReq.getUserId()).build());
-            //不存在身份认证信息则新增，存在则不改变
+            UserIdentityInfo userIdentityInfo = buildUserIdentityInfo(idCardOcrDTO);
+            //不存在身份认证信息则新增，存在则更新
             if(count == 0){
-                UserIdentityInfo userIdentityInfo = new UserIdentityInfo();
-                if(idCardOcrDTO.getType() == 1){
-                    //正面照信息
-                    userIdentityInfo.setIdentityAddress(idCardOcrDTO.getAddress());
-                    userIdentityInfo.setBirthday(idCardOcrDTO.getBirthday());
-                    userIdentityInfo.setIdentityId(idCardOcrDTO.getCId());
-                    userIdentityInfo.setRealName(idCardOcrDTO.getCName());
-                    userIdentityInfo.setSex(idCardOcrDTO.getSex().equals("男")?1:0);
-                }else{
-                    String startDate = idCardOcrDTO.getValiddate1();
-
-//                    userIdentityInfo.setStartDate();
-                }
-
+                userIdentityInfoService.insert(userIdentityInfo);
+            }else{
+                userIdentityInfoService.updateById(userIdentityInfo);
             }
 
         } catch (Exception e) {
@@ -127,6 +119,23 @@ public class IdentityServiceImpl implements IdentityService {
         }
 
         return null;
+    }
+
+    public UserIdentityInfo buildUserIdentityInfo(IdCardOcrDTO idCardOcrDTO){
+        UserIdentityInfo userIdentityInfo = new UserIdentityInfo();
+        if(idCardOcrDTO.getType() == FRONT){
+            //正面照信息
+            userIdentityInfo.setIdentityAddress(idCardOcrDTO.getAddress());
+            userIdentityInfo.setBirthday(idCardOcrDTO.getBirthday());
+            userIdentityInfo.setIdentityId(idCardOcrDTO.getCId());
+            userIdentityInfo.setRealName(idCardOcrDTO.getCName());
+            userIdentityInfo.setSex(idCardOcrDTO.getSex().equals("男")?1:0);
+        }else{
+            String startDate = idCardOcrDTO.getValiddate1();
+            String endDate = idCardOcrDTO.getValiddate2();
+            String authority = idCardOcrDTO.getAuthority();
+        }
+        return userIdentityInfo;
     }
 
     private String decrypt(String content, String key) throws Exception {

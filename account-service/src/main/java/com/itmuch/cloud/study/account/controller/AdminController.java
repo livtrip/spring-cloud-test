@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/rest/admin")
-@Api(description = "管理员服务", value = "管理员服务")
+@Api(tags = "1.2", description = "管理员服务", value = "管理员服务")
 @Slf4j
 public class AdminController {
 
