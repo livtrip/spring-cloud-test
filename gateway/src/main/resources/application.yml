@@ -18,6 +18,11 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://111.231.189.44:8761/eureka
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+  eureka:
+    enabled: true
 zuul:
   prefix: /api # 设置一个公共的前缀
 #  ignored-services: '*' #此配置表名忽略所有默认路由，都由配置文件决定
