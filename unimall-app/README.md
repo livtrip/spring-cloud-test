@@ -1,5 +1,10 @@
 ### CentOS 安装 NodeJs 8.15.0
 
+
+```text
+scp h5.zip root@47.75.85.48:/home
+```
+
 * 安装前先cd进下载目录,并用wget下载包，其他版本可去[官方网站](https://nodejs.org/en/download/releases/)上查找。
 ```text
 cd ~/downloads
