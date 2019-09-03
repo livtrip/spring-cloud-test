@@ -24,39 +24,39 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/rest/account")
-@Api(description = "账户服务", value = "账户服务")
+@Api(tags = "1.1", description = "账户服务", value = "账户服务")
 @Slf4j
 public class AccountController extends BaseController {
 
     @Autowired
     private AccountService accountService;
 
-    @ApiOperation(value = "/account/getBalanceByUserId",notes = "查询余额")
+    @ApiOperation(value = "/account/getBalanceByUserId", notes = "查询余额")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId" ,value = "用户ID" ,dataType = ApiDataType.LONG ,paramType = ApiParamType.QUERY)
+            @ApiImplicitParam(name = "userId", value = "用户ID", dataType = ApiDataType.LONG, paramType = ApiParamType.QUERY)
     })
     @GetMapping("getBalanceByUserId")
-    public Result<Long> getBalanceByUserId(Long userId){
-        Assert.isNull(userId,"用户Id不能为空");
+    public Result<Long> getBalanceByUserId(Long userId) {
+        Assert.isNull(userId, "用户Id不能为空");
         List<Account> accountList = accountService.queryForList(AccountQO.builder().userId(userId).build());
-        Assert.isTrue(CollectionUtil.isEmpty(accountList),"账户不存在");
+        Assert.isTrue(CollectionUtil.isEmpty(accountList), "账户不存在");
         return Results.newSuccessResult(accountList.get(0).getAccountBalance());
     }
 
-    @ApiOperation(value = "/account/updateBalanceByUserId",notes = "更新余额")
+    @ApiOperation(value = "/account/updateBalanceByUserId", notes = "更新余额")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId" ,value = "用户ID" ,dataType = ApiDataType.LONG ,paramType = ApiParamType.QUERY),
-            @ApiImplicitParam(name = "amount" ,value = "修改值" ,dataType = ApiDataType.LONG ,paramType = ApiParamType.QUERY)
+            @ApiImplicitParam(name = "userId", value = "用户ID", dataType = ApiDataType.LONG, paramType = ApiParamType.QUERY),
+            @ApiImplicitParam(name = "amount", value = "修改值", dataType = ApiDataType.LONG, paramType = ApiParamType.QUERY)
     })
     @GetMapping("updateBalanceByUserId")
-    public Result<Boolean> updateBalanceByUserId(Long userId, Long amount){
+    public Result<Boolean> updateBalanceByUserId(Long userId, Long amount) {
         Assert.isNull(userId, "用户ID不能为空");
-        Assert.isNull(amount,"修改值不能为空");
+        Assert.isNull(amount, "修改值不能为空");
         List<Account> accountList = accountService.queryForList(AccountQO.builder().userId(userId).build());
-        Assert.isTrue(CollectionUtil.isEmpty(accountList),"账户不存在");
+        Assert.isTrue(CollectionUtil.isEmpty(accountList), "账户不存在");
         Account account = accountList.get(0);
-        int num = accountService.updateByExampleSelective(AccountQO.builder().userId(userId).totalAmount(account.getAccountBalance()+amount).build());
-        Assert.isTrue(num < 0,"更新账户余额失败");
+        int num = accountService.updateByExampleSelective(AccountQO.builder().userId(userId).totalAmount(account.getAccountBalance() + amount).build());
+        Assert.isTrue(num < 0, "更新账户余额失败");
         return Results.newSuccessResult(true);
     }
 

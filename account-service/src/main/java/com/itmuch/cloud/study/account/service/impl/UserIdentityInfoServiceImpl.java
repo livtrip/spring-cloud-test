@@ -49,6 +49,11 @@ public class UserIdentityInfoServiceImpl implements UserIdentityInfoService {
         return userIdentityInfoDao.save(userIdentityInfo);
     }
 
+    @Override
+    public Integer updateById(UserIdentityInfo userIdentityInfo) {
+        return userIdentityInfoDao.updateByPrimaryKey(userIdentityInfo);
+    }
+
 
     public UserIdentityInfoExample generate(UserIdentityInfoQO qo){
         UserIdentityInfoExample example = new UserIdentityInfoExample();

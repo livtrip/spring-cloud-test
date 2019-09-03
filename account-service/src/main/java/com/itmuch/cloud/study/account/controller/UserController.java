@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/rest/user")
-@Api(description = "用户服务", value = "用户服务")
+@Api(tags = "1.5", description = "用户服务", value = "用户服务")
 @Slf4j
 public class UserController {
 

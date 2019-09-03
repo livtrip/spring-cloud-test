@@ -14,4 +14,6 @@ public interface UserIdentityInfoService {
     Integer countByCondition(UserIdentityInfoQO qo);
 
     Integer insert(UserIdentityInfo userIdentityInfo);
+
+    Integer updateById(UserIdentityInfo userIdentityInfo);
 }
