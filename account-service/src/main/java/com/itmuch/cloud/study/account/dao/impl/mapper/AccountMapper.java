@@ -2,10 +2,10 @@ package com.itmuch.cloud.study.account.dao.impl.mapper;
 
 import com.itmuch.cloud.study.account.entity.Account;
 import com.itmuch.cloud.study.account.entity.AccountExample;
-
-import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface AccountMapper {
