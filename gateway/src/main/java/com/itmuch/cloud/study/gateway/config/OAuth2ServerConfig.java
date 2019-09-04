@@ -44,6 +44,7 @@ public class OAuth2ServerConfig {
                 "/swagger-ui.html",
                 "swagger-resources/configuration/ui",
                 "/doc.html",
+                "/api/**",
                 "/webjars/**"
         };
 
