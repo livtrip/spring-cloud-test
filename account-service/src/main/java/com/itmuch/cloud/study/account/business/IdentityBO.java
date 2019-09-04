@@ -1,12 +1,13 @@
-package com.itmuch.cloud.study.account.service.impl;
+package com.itmuch.cloud.study.account.business;
 
 
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
-import com.itmuch.cloud.study.account.bean.dto.IdCardOcrDTO;
 import com.itmuch.cloud.study.account.bean.qo.UserIdentityInfoQO;
 import com.itmuch.cloud.study.account.bean.request.IdCardBase64ImgReq;
+import com.itmuch.cloud.study.account.bean.response.IdCardOcrRes;
 import com.itmuch.cloud.study.account.entity.UserIdentityInfo;
-import com.itmuch.cloud.study.account.service.IdentityService;
 import com.itmuch.cloud.study.account.service.UserIdentityInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -51,7 +52,7 @@ import java.util.*;
  */
 @Service
 @Slf4j
-public class IdentityServiceImpl implements IdentityService {
+public class IdentityBO {
 
     private static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
 
@@ -77,9 +78,16 @@ public class IdentityServiceImpl implements IdentityService {
     @Autowired
     private UserIdentityInfoService userIdentityInfoService;
 
-
-    @Override
-    public IdCardOcrDTO idCardOcr(IdCardBase64ImgReq idCardBase64ImgReq) {
+    /**
+     * 提取身份证照片信息保存
+     *  逻辑:
+     *   1.重复提交会覆盖之前的数据
+     *   2.正面照数据保存
+     *   3.反面照数据保存
+     * @param idCardBase64ImgReq
+     * @return
+     */
+    public IdCardOcrRes idCardOcr(IdCardBase64ImgReq idCardBase64ImgReq) {
         try {
             Map<String, String> paramMap = new HashMap<String, String>();
             Map<String, String> contentMap = new HashMap<String, String>();
@@ -104,14 +112,15 @@ public class IdentityServiceImpl implements IdentityService {
             resultJson = decrypt(resultJson, realSecret);
             log.info("retJson={}", resultJson);
 
-            IdCardOcrDTO idCardOcrDTO = JSON.parseObject(resultJson, IdCardOcrDTO.class);
+            IdCardOcrRes IdCardOcrRes = JSON.parseObject(resultJson, IdCardOcrRes.class);
             Integer count =  userIdentityInfoService.countByCondition(UserIdentityInfoQO.builder().userId(idCardBase64ImgReq.getUserId()).build());
-            UserIdentityInfo userIdentityInfo = buildUserIdentityInfo(idCardOcrDTO);
+            UserIdentityInfo userIdentityInfo = buildUserIdentityInfo(IdCardOcrRes);
+            userIdentityInfo.setUserId(idCardBase64ImgReq.getUserId());
             //不存在身份认证信息则新增，存在则更新
             if(count == 0){
                 userIdentityInfoService.insert(userIdentityInfo);
             }else{
-                userIdentityInfoService.updateById(userIdentityInfo);
+                userIdentityInfoService.updateByCondition(userIdentityInfo, UserIdentityInfoQO.builder().userId(idCardBase64ImgReq.getUserId()).build());
             }
 
         } catch (Exception e) {
@@ -121,19 +130,21 @@ public class IdentityServiceImpl implements IdentityService {
         return null;
     }
 
-    public UserIdentityInfo buildUserIdentityInfo(IdCardOcrDTO idCardOcrDTO){
+    public UserIdentityInfo buildUserIdentityInfo(IdCardOcrRes IdCardOcrRes){
         UserIdentityInfo userIdentityInfo = new UserIdentityInfo();
-        if(idCardOcrDTO.getType() == FRONT){
+        if(IdCardOcrRes.getType() == FRONT){
             //正面照信息
-            userIdentityInfo.setIdentityAddress(idCardOcrDTO.getAddress());
-            userIdentityInfo.setBirthday(idCardOcrDTO.getBirthday());
-            userIdentityInfo.setIdentityId(idCardOcrDTO.getCId());
-            userIdentityInfo.setRealName(idCardOcrDTO.getCName());
-            userIdentityInfo.setSex(idCardOcrDTO.getSex().equals("男")?1:0);
+            userIdentityInfo.setIdentityAddress(IdCardOcrRes.getAddress());
+            userIdentityInfo.setBirthday(IdCardOcrRes.getBirthday());
+            userIdentityInfo.setIdentityId(IdCardOcrRes.getCId());
+            userIdentityInfo.setRealName(IdCardOcrRes.getCName());
+            userIdentityInfo.setSex(IdCardOcrRes.getSex().equals("男")?1:0);
         }else{
-            String startDate = idCardOcrDTO.getValiddate1();
-            String endDate = idCardOcrDTO.getValiddate2();
-            String authority = idCardOcrDTO.getAuthority();
+            String startDate = IdCardOcrRes.getValiddate1();
+            String endDate = IdCardOcrRes.getValiddate2();
+            String authority = IdCardOcrRes.getAuthority();
+            userIdentityInfo.setStartDate(DateUtil.parse(startDate, DatePattern.PURE_DATE_PATTERN));
+            userIdentityInfo.setEndDate(DateUtil.parse(endDate, DatePattern.PURE_DATE_PATTERN));
         }
         return userIdentityInfo;
     }

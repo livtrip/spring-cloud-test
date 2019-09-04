@@ -5,7 +5,7 @@ import com.battcn.swagger.properties.ApiParamType;
 import com.itmuch.cloud.study.account.bean.qo.UserQO;
 import com.itmuch.cloud.study.account.bean.request.IdCardBase64ImgReq;
 import com.itmuch.cloud.study.account.bean.response.IdCardOcrRes;
-import com.itmuch.cloud.study.account.service.IdentityService;
+import com.itmuch.cloud.study.account.business.IdentityBO;
 import com.itmuch.cloud.study.account.service.UserService;
 import com.itmuch.cloud.study.common.base.Result;
 import com.itmuch.cloud.study.common.base.Results;
@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class IdentityController {
 
     @Autowired
-    private IdentityService identityService;
+    private IdentityBO identityBO;
 
     @Autowired
     private UserService userService;
@@ -50,9 +50,7 @@ public class IdentityController {
     public Result<IdCardOcrRes> idCardOcr(@RequestBody IdCardBase64ImgReq idcardBase64Img){
         ValidatorUtils.validateEntity(idcardBase64Img);
         Assert.isTrue(userService.countByCondition(UserQO.builder().id(idcardBase64Img.getUserId()).build()) == 0, "用户不存在");
-        identityService.idCardOcr(idcardBase64Img);
-
-        return Results.newSuccessResult(null);
+        return Results.newSuccessResult(identityBO.idCardOcr(idcardBase64Img));
     }
 
 
