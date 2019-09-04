@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itmuch.cloud.study.payment.dao.impl.mapper.CheckOutRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.itmuch.cloud.study.payment.entity.CheckOutRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="order_id" property="orderId" jdbcType="BIGINT" />
+    <result column="check_out_order_id" property="checkOutOrderId" jdbcType="VARCHAR" />
+    <result column="batch_no" property="batchNo" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="product" property="product" jdbcType="VARCHAR" />
+    <result column="urgency" property="urgency" jdbcType="INTEGER" />
+    <result column="account_name" property="accountName" jdbcType="VARCHAR" />
+    <result column="account_number" property="accountNumber" jdbcType="VARCHAR" />
+    <result column="bank_code" property="bankCode" jdbcType="VARCHAR" />
+    <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+    <result column="bank_branch_name" property="bankBranchName" jdbcType="VARCHAR" />
+    <result column="province_code" property="provinceCode" jdbcType="VARCHAR" />
+    <result column="city_code" property="cityCode" jdbcType="VARCHAR" />
+    <result column="fee_type" property="feeType" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="leave_word" property="leaveWord" jdbcType="VARCHAR" />
+    <result column="create_person" property="createPerson" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_person" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, status, user_id, order_id, check_out_order_id, batch_no, amount, product, urgency, 
+    account_name, account_number, bank_code, bank_name, bank_branch_name, province_code, 
+    city_code, fee_type, description, leave_word, create_person, create_time, update_person, 
+    modify_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itmuch.cloud.study.payment.entity.CheckOutRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_check_out_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_check_out_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_check_out_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itmuch.cloud.study.payment.entity.CheckOutRecordExample" >
+    delete from tb_check_out_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itmuch.cloud.study.payment.entity.CheckOutRecord" >
+    insert into tb_check_out_record (id, status, user_id, 
+      order_id, check_out_order_id, batch_no, 
+      amount, product, urgency, 
+      account_name, account_number, bank_code, 
+      bank_name, bank_branch_name, province_code, 
+      city_code, fee_type, description, 
+      leave_word, create_person, create_time, 
+      update_person, modify_time)
+    values (#{id,jdbcType=BIGINT}, #{status,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{orderId,jdbcType=BIGINT}, #{checkOutOrderId,jdbcType=VARCHAR}, #{batchNo,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DECIMAL}, #{product,jdbcType=VARCHAR}, #{urgency,jdbcType=INTEGER}, 
+      #{accountName,jdbcType=VARCHAR}, #{accountNumber,jdbcType=VARCHAR}, #{bankCode,jdbcType=VARCHAR}, 
+      #{bankName,jdbcType=VARCHAR}, #{bankBranchName,jdbcType=VARCHAR}, #{provinceCode,jdbcType=VARCHAR}, 
+      #{cityCode,jdbcType=VARCHAR}, #{feeType,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{leaveWord,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updatePerson,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itmuch.cloud.study.payment.entity.CheckOutRecord" >
+    insert into tb_check_out_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="checkOutOrderId != null" >
+        check_out_order_id,
+      </if>
+      <if test="batchNo != null" >
+        batch_no,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="product != null" >
+        product,
+      </if>
+      <if test="urgency != null" >
+        urgency,
+      </if>
+      <if test="accountName != null" >
+        account_name,
+      </if>
+      <if test="accountNumber != null" >
+        account_number,
+      </if>
+      <if test="bankCode != null" >
+        bank_code,
+      </if>
+      <if test="bankName != null" >
+        bank_name,
+      </if>
+      <if test="bankBranchName != null" >
+        bank_branch_name,
+      </if>
+      <if test="provinceCode != null" >
+        province_code,
+      </if>
+      <if test="cityCode != null" >
+        city_code,
+      </if>
+      <if test="feeType != null" >
+        fee_type,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="leaveWord != null" >
+        leave_word,
+      </if>
+      <if test="createPerson != null" >
+        create_person,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updatePerson != null" >
+        update_person,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="checkOutOrderId != null" >
+        #{checkOutOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNo != null" >
+        #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="product != null" >
+        #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="urgency != null" >
+        #{urgency,jdbcType=INTEGER},
+      </if>
+      <if test="accountName != null" >
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountNumber != null" >
+        #{accountNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCode != null" >
+        #{bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankBranchName != null" >
+        #{bankBranchName,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null" >
+        #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="feeType != null" >
+        #{feeType,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveWord != null" >
+        #{leaveWord,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePerson != null" >
+        #{updatePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itmuch.cloud.study.payment.entity.CheckOutRecordExample" resultType="java.lang.Integer" >
+    select count(*) from tb_check_out_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_check_out_record
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.checkOutOrderId != null" >
+        check_out_order_id = #{record.checkOutOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchNo != null" >
+        batch_no = #{record.batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.product != null" >
+        product = #{record.product,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urgency != null" >
+        urgency = #{record.urgency,jdbcType=INTEGER},
+      </if>
+      <if test="record.accountName != null" >
+        account_name = #{record.accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountNumber != null" >
+        account_number = #{record.accountNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankCode != null" >
+        bank_code = #{record.bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankName != null" >
+        bank_name = #{record.bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankBranchName != null" >
+        bank_branch_name = #{record.bankBranchName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceCode != null" >
+        province_code = #{record.provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityCode != null" >
+        city_code = #{record.cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feeType != null" >
+        fee_type = #{record.feeType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leaveWord != null" >
+        leave_word = #{record.leaveWord,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createPerson != null" >
+        create_person = #{record.createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatePerson != null" >
+        update_person = #{record.updatePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_check_out_record
+    set id = #{record.id,jdbcType=BIGINT},
+      status = #{record.status,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      order_id = #{record.orderId,jdbcType=BIGINT},
+      check_out_order_id = #{record.checkOutOrderId,jdbcType=VARCHAR},
+      batch_no = #{record.batchNo,jdbcType=VARCHAR},
+      amount = #{record.amount,jdbcType=DECIMAL},
+      product = #{record.product,jdbcType=VARCHAR},
+      urgency = #{record.urgency,jdbcType=INTEGER},
+      account_name = #{record.accountName,jdbcType=VARCHAR},
+      account_number = #{record.accountNumber,jdbcType=VARCHAR},
+      bank_code = #{record.bankCode,jdbcType=VARCHAR},
+      bank_name = #{record.bankName,jdbcType=VARCHAR},
+      bank_branch_name = #{record.bankBranchName,jdbcType=VARCHAR},
+      province_code = #{record.provinceCode,jdbcType=VARCHAR},
+      city_code = #{record.cityCode,jdbcType=VARCHAR},
+      fee_type = #{record.feeType,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      leave_word = #{record.leaveWord,jdbcType=VARCHAR},
+      create_person = #{record.createPerson,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_person = #{record.updatePerson,jdbcType=VARCHAR},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itmuch.cloud.study.payment.entity.CheckOutRecord" >
+    update tb_check_out_record
+    <set >
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="checkOutOrderId != null" >
+        check_out_order_id = #{checkOutOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNo != null" >
+        batch_no = #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="product != null" >
+        product = #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="urgency != null" >
+        urgency = #{urgency,jdbcType=INTEGER},
+      </if>
+      <if test="accountName != null" >
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountNumber != null" >
+        account_number = #{accountNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCode != null" >
+        bank_code = #{bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        bank_name = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankBranchName != null" >
+        bank_branch_name = #{bankBranchName,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceCode != null" >
+        province_code = #{provinceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null" >
+        city_code = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="feeType != null" >
+        fee_type = #{feeType,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveWord != null" >
+        leave_word = #{leaveWord,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null" >
+        create_person = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePerson != null" >
+        update_person = #{updatePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itmuch.cloud.study.payment.entity.CheckOutRecord" >
+    update tb_check_out_record
+    set status = #{status,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      order_id = #{orderId,jdbcType=BIGINT},
+      check_out_order_id = #{checkOutOrderId,jdbcType=VARCHAR},
+      batch_no = #{batchNo,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      product = #{product,jdbcType=VARCHAR},
+      urgency = #{urgency,jdbcType=INTEGER},
+      account_name = #{accountName,jdbcType=VARCHAR},
+      account_number = #{accountNumber,jdbcType=VARCHAR},
+      bank_code = #{bankCode,jdbcType=VARCHAR},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      bank_branch_name = #{bankBranchName,jdbcType=VARCHAR},
+      province_code = #{provinceCode,jdbcType=VARCHAR},
+      city_code = #{cityCode,jdbcType=VARCHAR},
+      fee_type = #{feeType,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      leave_word = #{leaveWord,jdbcType=VARCHAR},
+      create_person = #{createPerson,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_person = #{updatePerson,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
