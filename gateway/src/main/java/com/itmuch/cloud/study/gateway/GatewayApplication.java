@@ -42,7 +42,7 @@ public class GatewayApplication {
             resources.add(swaggerResource("order-service", "/api/order/v2/api-docs", "2.0"));
             resources.add(swaggerResource("commodity-service", "/api/commodity/v2/api-docs", "2.0"));
             resources.add(swaggerResource("payment-service", "/api/payment/v2/api-docs", "2.0"));
-            resources.add(swaggerResource("account-service", "http://111.231.189.44:8762/api/account/v2/api-docs", "2.0"));
+            resources.add(swaggerResource("account-service", "/api/account/v2/api-docs", "2.0"));
             return resources;
         }
 
