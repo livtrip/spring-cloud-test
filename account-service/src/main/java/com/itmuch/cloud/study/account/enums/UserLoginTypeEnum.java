@@ -1,4 +1,4 @@
-package com.itmuch.cloud.study.account.bean.enums;
+package com.itmuch.cloud.study.account.enums;
 
 public enum UserLoginTypeEnum {
 

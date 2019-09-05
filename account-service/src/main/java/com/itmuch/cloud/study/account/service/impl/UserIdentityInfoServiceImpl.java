@@ -29,7 +29,7 @@ public class UserIdentityInfoServiceImpl implements UserIdentityInfoService {
     @Override
     public Integer updateByCondition(UserIdentityInfo userIdentityInfo, UserIdentityInfoQO qo) {
         UserIdentityInfoExample example = generate(qo);
-        return userIdentityInfoDao.updateByExample(userIdentityInfo, example);
+        return userIdentityInfoDao.updateByExampleSelective(userIdentityInfo, example);
     }
 
     @Override
@@ -53,6 +53,8 @@ public class UserIdentityInfoServiceImpl implements UserIdentityInfoService {
     public Integer updateById(UserIdentityInfo userIdentityInfo) {
         return userIdentityInfoDao.updateByPrimaryKey(userIdentityInfo);
     }
+
+
 
 
     public UserIdentityInfoExample generate(UserIdentityInfoQO qo){
