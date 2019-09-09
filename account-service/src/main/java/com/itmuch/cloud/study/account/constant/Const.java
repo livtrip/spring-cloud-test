@@ -1,4 +1,4 @@
-package com.itmuch.cloud.study.account.bean.constant;
+package com.itmuch.cloud.study.account.constant;
 
 public class Const {
 

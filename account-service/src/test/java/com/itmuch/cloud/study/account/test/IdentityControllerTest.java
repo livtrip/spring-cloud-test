@@ -1,6 +1,5 @@
 package com.itmuch.cloud.study.account.test;
 
-import com.itmuch.cloud.study.account.AccountApplication;
 import com.itmuch.cloud.study.account.bean.request.IdCardBase64ImgReq;
 import com.itmuch.cloud.study.account.controller.IdentityController;
 import com.itmuch.cloud.study.common.util.ImgUtil;
@@ -29,7 +28,7 @@ public class IdentityControllerTest {
 
     @Test
     public void idCardOcr(){
-        String path1 = "/Users/mark1xie/workspce-trj/trj/ddyd/src/main/resources/static/images/test.jpg";
+        String path1 = "/Users/mark1xie/workspace/spring-cloud-test-v/account-service/src/main/resources/static/a-back.jpeg";
 //        String path2 = "/Users/markxrrl/workspace-cloud/spring-cloud-test/account-service/src/main/resources/static/test.jpg";
 
         String faceImg = ImgUtil.getBase64Img(path1);
