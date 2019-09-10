@@ -1,4 +1,4 @@
-package com.itmuch.cloud.study.payment.bean;
+package com.itmuch.cloud.study.payment.bean.qo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
