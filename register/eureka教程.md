@@ -4,5 +4,5 @@
 
 * 服务注册中心启动脚本
 ```text
-docker run -p 8761:8761 -d   --name register itmuch/register:0.0.1-SNAPSHOT
+docker run --net=host -p 8761:8761 -d  --name myregister1 itmuch/register:0.0.1-SNAPSHOT
 ```
