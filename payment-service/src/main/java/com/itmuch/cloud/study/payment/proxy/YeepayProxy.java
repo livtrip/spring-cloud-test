@@ -8,4 +8,5 @@ package com.itmuch.cloud.study.payment.proxy;
  * @create 2019/9/9 11:28 上午
  */
 public class YeepayProxy {
+
 }
