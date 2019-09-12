@@ -5,7 +5,7 @@ eureka:
     prefer-ip-address: true
     status-page-url-path: /actuator/info
     health-check-url-path: /actuator/health
-    hostname: localhost
+    hostname: 111.231.189.44
   client:
     registerWithEureka: false
     fetchRegistry: false

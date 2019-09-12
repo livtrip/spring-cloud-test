@@ -27,7 +27,7 @@ mybatis:
 # eureka
 eureka:
   instance:
-    hostname: localhost
+    hostname: 111.231.189.44
     appname: account-service
     instance-id: http://111.231.189.44:${server.port}
     prefer-ip-address: true
