@@ -13,8 +13,9 @@ eureka:
   instance:
       hostname: localhost
       appname: gateway
-      instance-id: gateway:port-8768-1
+      instance-id: http://111.231.189.44:${server.port}
       prefer-ip-address: true
+      ip-address: 111.231.189.44
   client:
     serviceUrl:
       defaultZone: http://111.231.189.44:8761/eureka
