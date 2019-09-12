@@ -11,7 +11,7 @@ server:
   port: 8768
 eureka:
   instance:
-      hostname: localhost
+      hostname: 111.231.189.44
       appname: gateway
       instance-id: http://111.231.189.44:${server.port}
       prefer-ip-address: true
@@ -43,10 +43,10 @@ zuul:
     payment-service:
       path: /payment/**
       serviceId: payment-service
-security:
-  oauth2:
-    resource:
-      filter-order: 3  # 将资源过滤器链提升到springsecurity的过滤器链之前
-      id:  /api/**
-      token-info-uri: http://localhost:8080/oauth/check_token
-      prefer-token-info: true
+#security:
+#  oauth2:
+#    resource:
+#      filter-order: 3  # 将资源过滤器链提升到springsecurity的过滤器链之前
+#      id:  /api/**
+#      token-info-uri: http://localhost:8080/oauth/check_token
+#      prefer-token-info: true

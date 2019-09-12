@@ -40,7 +40,6 @@ public class PreRequestFilter extends ZuulFilter {
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         LOG.info("send {} request to {}",request.getMethod(),request.getRequestURL().toString());
         return null;
     }

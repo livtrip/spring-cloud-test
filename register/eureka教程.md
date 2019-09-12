@@ -41,6 +41,8 @@ eureka:
 
 
 docker run -d --name account-service13 --expose=8762 -p 8762:8762 -e "EUREKA_INSTANCE_IP-ADDRESS=111.231.189.44" -e "SERVER_PORT=8761" itmuch/account-service:0.0.1-SNAPSHOT
+
+
 docker run -d --name myregister14  --expose=8761 -p 8761:8761   itmuch/register:0.0.1-SNAPSHOT
 
 ```

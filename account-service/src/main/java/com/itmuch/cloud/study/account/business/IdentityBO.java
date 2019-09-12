@@ -142,6 +142,7 @@ public class IdentityBO {
         }else{
             String startDate = IdCardOcrRes.getValiddate1();
             String endDate = IdCardOcrRes.getValiddate2();
+            //TODO 签发机关保存进入数据库
             String authority = IdCardOcrRes.getAuthority();
             userIdentityInfo.setStartDate(DateUtil.parse(startDate, DatePattern.PURE_DATE_PATTERN));
             userIdentityInfo.setEndDate(DateUtil.parse(endDate, DatePattern.PURE_DATE_PATTERN));
