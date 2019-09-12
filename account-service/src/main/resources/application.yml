@@ -29,7 +29,7 @@ eureka:
   instance:
     hostname: localhost
     appname: account-service
-    instance-id: account-service:port-8762
+    instance-id: 111.231.189.44:8762
     prefer-ip-address: true
     health-check-url-path: /health
   client:
