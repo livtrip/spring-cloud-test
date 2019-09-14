@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itmuch.cloud.study.payment.dao.impl.mapper.PayTransactionMapper" >
+  <resultMap id="BaseResultMap" type="com.itmuch.cloud.study.payment.entity.PayTransaction" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="app_id" property="appId" jdbcType="VARCHAR" />
+    <result column="pay_method_id" property="payMethodId" jdbcType="INTEGER" />
+    <result column="app_order_id" property="appOrderId" jdbcType="VARCHAR" />
+    <result column="transaction_id" property="transactionId" jdbcType="VARCHAR" />
+    <result column="total_fee" property="totalFee" jdbcType="INTEGER" />
+    <result column="scale" property="scale" jdbcType="TINYINT" />
+    <result column="currency_code" property="currencyCode" jdbcType="VARCHAR" />
+    <result column="pay_channel" property="payChannel" jdbcType="VARCHAR" />
+    <result column="expire_time" property="expireTime" jdbcType="TIMESTAMP" />
+    <result column="return_url" property="returnUrl" jdbcType="VARCHAR" />
+    <result column="notify_url" property="notifyUrl" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="sing_type" property="singType" jdbcType="VARCHAR" />
+    <result column="intput_charset" property="intputCharset" jdbcType="VARCHAR" />
+    <result column="payment_time" property="paymentTime" jdbcType="TIMESTAMP" />
+    <result column="notify_time" property="notifyTime" jdbcType="TIMESTAMP" />
+    <result column="finish_time" property="finishTime" jdbcType="TIMESTAMP" />
+    <result column="trade_no" property="tradeNo" jdbcType="VARCHAR" />
+    <result column="transaction_code" property="transactionCode" jdbcType="VARCHAR" />
+    <result column="order_status" property="orderStatus" jdbcType="TINYINT" />
+    <result column="create_ip" property="createIp" jdbcType="VARCHAR" />
+    <result column="update_ip" property="updateIp" jdbcType="VARCHAR" />
+    <result column="create_person" property="createPerson" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_person" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, app_id, pay_method_id, app_order_id, transaction_id, total_fee, scale, currency_code, 
+    pay_channel, expire_time, return_url, notify_url, email, sing_type, intput_charset, 
+    payment_time, notify_time, finish_time, trade_no, transaction_code, order_status, 
+    create_ip, update_ip, create_person, create_time, update_person, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itmuch.cloud.study.payment.entity.PayTransactionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_pay_transaction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_pay_transaction
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_pay_transaction
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itmuch.cloud.study.payment.entity.PayTransactionExample" >
+    delete from tb_pay_transaction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itmuch.cloud.study.payment.entity.PayTransaction" >
+    insert into tb_pay_transaction (id, app_id, pay_method_id, 
+      app_order_id, transaction_id, total_fee, 
+      scale, currency_code, pay_channel, 
+      expire_time, return_url, notify_url, 
+      email, sing_type, intput_charset, 
+      payment_time, notify_time, finish_time, 
+      trade_no, transaction_code, order_status, 
+      create_ip, update_ip, create_person, 
+      create_time, update_person, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{appId,jdbcType=VARCHAR}, #{payMethodId,jdbcType=INTEGER}, 
+      #{appOrderId,jdbcType=VARCHAR}, #{transactionId,jdbcType=VARCHAR}, #{totalFee,jdbcType=INTEGER}, 
+      #{scale,jdbcType=TINYINT}, #{currencyCode,jdbcType=VARCHAR}, #{payChannel,jdbcType=VARCHAR}, 
+      #{expireTime,jdbcType=TIMESTAMP}, #{returnUrl,jdbcType=VARCHAR}, #{notifyUrl,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{singType,jdbcType=VARCHAR}, #{intputCharset,jdbcType=VARCHAR}, 
+      #{paymentTime,jdbcType=TIMESTAMP}, #{notifyTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP}, 
+      #{tradeNo,jdbcType=VARCHAR}, #{transactionCode,jdbcType=VARCHAR}, #{orderStatus,jdbcType=TINYINT}, 
+      #{createIp,jdbcType=VARCHAR}, #{updateIp,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.itmuch.cloud.study.payment.entity.PayTransaction" >
+    insert into tb_pay_transaction
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="appId != null" >
+        app_id,
+      </if>
+      <if test="payMethodId != null" >
+        pay_method_id,
+      </if>
+      <if test="appOrderId != null" >
+        app_order_id,
+      </if>
+      <if test="transactionId != null" >
+        transaction_id,
+      </if>
+      <if test="totalFee != null" >
+        total_fee,
+      </if>
+      <if test="scale != null" >
+        scale,
+      </if>
+      <if test="currencyCode != null" >
+        currency_code,
+      </if>
+      <if test="payChannel != null" >
+        pay_channel,
+      </if>
+      <if test="expireTime != null" >
+        expire_time,
+      </if>
+      <if test="returnUrl != null" >
+        return_url,
+      </if>
+      <if test="notifyUrl != null" >
+        notify_url,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="singType != null" >
+        sing_type,
+      </if>
+      <if test="intputCharset != null" >
+        intput_charset,
+      </if>
+      <if test="paymentTime != null" >
+        payment_time,
+      </if>
+      <if test="notifyTime != null" >
+        notify_time,
+      </if>
+      <if test="finishTime != null" >
+        finish_time,
+      </if>
+      <if test="tradeNo != null" >
+        trade_no,
+      </if>
+      <if test="transactionCode != null" >
+        transaction_code,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+      <if test="createIp != null" >
+        create_ip,
+      </if>
+      <if test="updateIp != null" >
+        update_ip,
+      </if>
+      <if test="createPerson != null" >
+        create_person,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updatePerson != null" >
+        update_person,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="appId != null" >
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="payMethodId != null" >
+        #{payMethodId,jdbcType=INTEGER},
+      </if>
+      <if test="appOrderId != null" >
+        #{appOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionId != null" >
+        #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null" >
+        #{totalFee,jdbcType=INTEGER},
+      </if>
+      <if test="scale != null" >
+        #{scale,jdbcType=TINYINT},
+      </if>
+      <if test="currencyCode != null" >
+        #{currencyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannel != null" >
+        #{payChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="expireTime != null" >
+        #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnUrl != null" >
+        #{returnUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyUrl != null" >
+        #{notifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="singType != null" >
+        #{singType,jdbcType=VARCHAR},
+      </if>
+      <if test="intputCharset != null" >
+        #{intputCharset,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentTime != null" >
+        #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notifyTime != null" >
+        #{notifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishTime != null" >
+        #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tradeNo != null" >
+        #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionCode != null" >
+        #{transactionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createIp != null" >
+        #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="updateIp != null" >
+        #{updateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePerson != null" >
+        #{updatePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itmuch.cloud.study.payment.entity.PayTransactionExample" resultType="java.lang.Integer" >
+    select count(*) from tb_pay_transaction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_pay_transaction
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.appId != null" >
+        app_id = #{record.appId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payMethodId != null" >
+        pay_method_id = #{record.payMethodId,jdbcType=INTEGER},
+      </if>
+      <if test="record.appOrderId != null" >
+        app_order_id = #{record.appOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transactionId != null" >
+        transaction_id = #{record.transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalFee != null" >
+        total_fee = #{record.totalFee,jdbcType=INTEGER},
+      </if>
+      <if test="record.scale != null" >
+        scale = #{record.scale,jdbcType=TINYINT},
+      </if>
+      <if test="record.currencyCode != null" >
+        currency_code = #{record.currencyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payChannel != null" >
+        pay_channel = #{record.payChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expireTime != null" >
+        expire_time = #{record.expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.returnUrl != null" >
+        return_url = #{record.returnUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notifyUrl != null" >
+        notify_url = #{record.notifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.singType != null" >
+        sing_type = #{record.singType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intputCharset != null" >
+        intput_charset = #{record.intputCharset,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paymentTime != null" >
+        payment_time = #{record.paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.notifyTime != null" >
+        notify_time = #{record.notifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.finishTime != null" >
+        finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tradeNo != null" >
+        trade_no = #{record.tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transactionCode != null" >
+        transaction_code = #{record.transactionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderStatus != null" >
+        order_status = #{record.orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createIp != null" >
+        create_ip = #{record.createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateIp != null" >
+        update_ip = #{record.updateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createPerson != null" >
+        create_person = #{record.createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatePerson != null" >
+        update_person = #{record.updatePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_pay_transaction
+    set id = #{record.id,jdbcType=BIGINT},
+      app_id = #{record.appId,jdbcType=VARCHAR},
+      pay_method_id = #{record.payMethodId,jdbcType=INTEGER},
+      app_order_id = #{record.appOrderId,jdbcType=VARCHAR},
+      transaction_id = #{record.transactionId,jdbcType=VARCHAR},
+      total_fee = #{record.totalFee,jdbcType=INTEGER},
+      scale = #{record.scale,jdbcType=TINYINT},
+      currency_code = #{record.currencyCode,jdbcType=VARCHAR},
+      pay_channel = #{record.payChannel,jdbcType=VARCHAR},
+      expire_time = #{record.expireTime,jdbcType=TIMESTAMP},
+      return_url = #{record.returnUrl,jdbcType=VARCHAR},
+      notify_url = #{record.notifyUrl,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      sing_type = #{record.singType,jdbcType=VARCHAR},
+      intput_charset = #{record.intputCharset,jdbcType=VARCHAR},
+      payment_time = #{record.paymentTime,jdbcType=TIMESTAMP},
+      notify_time = #{record.notifyTime,jdbcType=TIMESTAMP},
+      finish_time = #{record.finishTime,jdbcType=TIMESTAMP},
+      trade_no = #{record.tradeNo,jdbcType=VARCHAR},
+      transaction_code = #{record.transactionCode,jdbcType=VARCHAR},
+      order_status = #{record.orderStatus,jdbcType=TINYINT},
+      create_ip = #{record.createIp,jdbcType=VARCHAR},
+      update_ip = #{record.updateIp,jdbcType=VARCHAR},
+      create_person = #{record.createPerson,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_person = #{record.updatePerson,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itmuch.cloud.study.payment.entity.PayTransaction" >
+    update tb_pay_transaction
+    <set >
+      <if test="appId != null" >
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="payMethodId != null" >
+        pay_method_id = #{payMethodId,jdbcType=INTEGER},
+      </if>
+      <if test="appOrderId != null" >
+        app_order_id = #{appOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionId != null" >
+        transaction_id = #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFee != null" >
+        total_fee = #{totalFee,jdbcType=INTEGER},
+      </if>
+      <if test="scale != null" >
+        scale = #{scale,jdbcType=TINYINT},
+      </if>
+      <if test="currencyCode != null" >
+        currency_code = #{currencyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payChannel != null" >
+        pay_channel = #{payChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="expireTime != null" >
+        expire_time = #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnUrl != null" >
+        return_url = #{returnUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyUrl != null" >
+        notify_url = #{notifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="singType != null" >
+        sing_type = #{singType,jdbcType=VARCHAR},
+      </if>
+      <if test="intputCharset != null" >
+        intput_charset = #{intputCharset,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentTime != null" >
+        payment_time = #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notifyTime != null" >
+        notify_time = #{notifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishTime != null" >
+        finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tradeNo != null" >
+        trade_no = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionCode != null" >
+        transaction_code = #{transactionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null" >
+        order_status = #{orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="updateIp != null" >
+        update_ip = #{updateIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null" >
+        create_person = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePerson != null" >
+        update_person = #{updatePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itmuch.cloud.study.payment.entity.PayTransaction" >
+    update tb_pay_transaction
+    set app_id = #{appId,jdbcType=VARCHAR},
+      pay_method_id = #{payMethodId,jdbcType=INTEGER},
+      app_order_id = #{appOrderId,jdbcType=VARCHAR},
+      transaction_id = #{transactionId,jdbcType=VARCHAR},
+      total_fee = #{totalFee,jdbcType=INTEGER},
+      scale = #{scale,jdbcType=TINYINT},
+      currency_code = #{currencyCode,jdbcType=VARCHAR},
+      pay_channel = #{payChannel,jdbcType=VARCHAR},
+      expire_time = #{expireTime,jdbcType=TIMESTAMP},
+      return_url = #{returnUrl,jdbcType=VARCHAR},
+      notify_url = #{notifyUrl,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      sing_type = #{singType,jdbcType=VARCHAR},
+      intput_charset = #{intputCharset,jdbcType=VARCHAR},
+      payment_time = #{paymentTime,jdbcType=TIMESTAMP},
+      notify_time = #{notifyTime,jdbcType=TIMESTAMP},
+      finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      trade_no = #{tradeNo,jdbcType=VARCHAR},
+      transaction_code = #{transactionCode,jdbcType=VARCHAR},
+      order_status = #{orderStatus,jdbcType=TINYINT},
+      create_ip = #{createIp,jdbcType=VARCHAR},
+      update_ip = #{updateIp,jdbcType=VARCHAR},
+      create_person = #{createPerson,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_person = #{updatePerson,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

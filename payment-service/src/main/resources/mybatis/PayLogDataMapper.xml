@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itmuch.cloud.study.payment.dao.impl.mapper.PayLogDataMapper" >
+  <resultMap id="BaseResultMap" type="com.itmuch.cloud.study.payment.entity.PayLogData" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="app_id" property="appId" jdbcType="VARCHAR" />
+    <result column="app_order_id" property="appOrderId" jdbcType="VARCHAR" />
+    <result column="transaction_id" property="transactionId" jdbcType="VARCHAR" />
+    <result column="log_type" property="logType" jdbcType="VARCHAR" />
+    <result column="create_ip" property="createIp" jdbcType="VARCHAR" />
+    <result column="create_person" property="createPerson" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_person" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.itmuch.cloud.study.payment.entity.PayLogDataWithBLOBs" extends="BaseResultMap" >
+    <result column="request_header" property="requestHeader" jdbcType="LONGVARCHAR" />
+    <result column="request_params" property="requestParams" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, app_id, app_order_id, transaction_id, log_type, create_ip, create_person, create_time, 
+    update_person, update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    request_header, request_params
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.itmuch.cloud.study.payment.entity.PayLogDataExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_pay_log_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itmuch.cloud.study.payment.entity.PayLogDataExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_pay_log_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_pay_log_data
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_pay_log_data
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itmuch.cloud.study.payment.entity.PayLogDataExample" >
+    delete from tb_pay_log_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itmuch.cloud.study.payment.entity.PayLogDataWithBLOBs" >
+    insert into tb_pay_log_data (id, app_id, app_order_id, 
+      transaction_id, log_type, create_ip, 
+      create_person, create_time, update_person, 
+      update_time, request_header, request_params
+      )
+    values (#{id,jdbcType=BIGINT}, #{appId,jdbcType=VARCHAR}, #{appOrderId,jdbcType=VARCHAR}, 
+      #{transactionId,jdbcType=VARCHAR}, #{logType,jdbcType=VARCHAR}, #{createIp,jdbcType=VARCHAR}, 
+      #{createPerson,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{requestHeader,jdbcType=LONGVARCHAR}, #{requestParams,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.itmuch.cloud.study.payment.entity.PayLogDataWithBLOBs" >
+    insert into tb_pay_log_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="appId != null" >
+        app_id,
+      </if>
+      <if test="appOrderId != null" >
+        app_order_id,
+      </if>
+      <if test="transactionId != null" >
+        transaction_id,
+      </if>
+      <if test="logType != null" >
+        log_type,
+      </if>
+      <if test="createIp != null" >
+        create_ip,
+      </if>
+      <if test="createPerson != null" >
+        create_person,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updatePerson != null" >
+        update_person,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="requestHeader != null" >
+        request_header,
+      </if>
+      <if test="requestParams != null" >
+        request_params,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="appId != null" >
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="appOrderId != null" >
+        #{appOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionId != null" >
+        #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="logType != null" >
+        #{logType,jdbcType=VARCHAR},
+      </if>
+      <if test="createIp != null" >
+        #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePerson != null" >
+        #{updatePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requestHeader != null" >
+        #{requestHeader,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="requestParams != null" >
+        #{requestParams,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itmuch.cloud.study.payment.entity.PayLogDataExample" resultType="java.lang.Integer" >
+    select count(*) from tb_pay_log_data
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_pay_log_data
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.appId != null" >
+        app_id = #{record.appId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appOrderId != null" >
+        app_order_id = #{record.appOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transactionId != null" >
+        transaction_id = #{record.transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logType != null" >
+        log_type = #{record.logType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createIp != null" >
+        create_ip = #{record.createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createPerson != null" >
+        create_person = #{record.createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatePerson != null" >
+        update_person = #{record.updatePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.requestHeader != null" >
+        request_header = #{record.requestHeader,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.requestParams != null" >
+        request_params = #{record.requestParams,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_pay_log_data
+    set id = #{record.id,jdbcType=BIGINT},
+      app_id = #{record.appId,jdbcType=VARCHAR},
+      app_order_id = #{record.appOrderId,jdbcType=VARCHAR},
+      transaction_id = #{record.transactionId,jdbcType=VARCHAR},
+      log_type = #{record.logType,jdbcType=VARCHAR},
+      create_ip = #{record.createIp,jdbcType=VARCHAR},
+      create_person = #{record.createPerson,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_person = #{record.updatePerson,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      request_header = #{record.requestHeader,jdbcType=LONGVARCHAR},
+      request_params = #{record.requestParams,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_pay_log_data
+    set id = #{record.id,jdbcType=BIGINT},
+      app_id = #{record.appId,jdbcType=VARCHAR},
+      app_order_id = #{record.appOrderId,jdbcType=VARCHAR},
+      transaction_id = #{record.transactionId,jdbcType=VARCHAR},
+      log_type = #{record.logType,jdbcType=VARCHAR},
+      create_ip = #{record.createIp,jdbcType=VARCHAR},
+      create_person = #{record.createPerson,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_person = #{record.updatePerson,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itmuch.cloud.study.payment.entity.PayLogDataWithBLOBs" >
+    update tb_pay_log_data
+    <set >
+      <if test="appId != null" >
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="appOrderId != null" >
+        app_order_id = #{appOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionId != null" >
+        transaction_id = #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="logType != null" >
+        log_type = #{logType,jdbcType=VARCHAR},
+      </if>
+      <if test="createIp != null" >
+        create_ip = #{createIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createPerson != null" >
+        create_person = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePerson != null" >
+        update_person = #{updatePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requestHeader != null" >
+        request_header = #{requestHeader,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="requestParams != null" >
+        request_params = #{requestParams,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.itmuch.cloud.study.payment.entity.PayLogDataWithBLOBs" >
+    update tb_pay_log_data
+    set app_id = #{appId,jdbcType=VARCHAR},
+      app_order_id = #{appOrderId,jdbcType=VARCHAR},
+      transaction_id = #{transactionId,jdbcType=VARCHAR},
+      log_type = #{logType,jdbcType=VARCHAR},
+      create_ip = #{createIp,jdbcType=VARCHAR},
+      create_person = #{createPerson,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_person = #{updatePerson,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      request_header = #{requestHeader,jdbcType=LONGVARCHAR},
+      request_params = #{requestParams,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itmuch.cloud.study.payment.entity.PayLogData" >
+    update tb_pay_log_data
+    set app_id = #{appId,jdbcType=VARCHAR},
+      app_order_id = #{appOrderId,jdbcType=VARCHAR},
+      transaction_id = #{transactionId,jdbcType=VARCHAR},
+      log_type = #{logType,jdbcType=VARCHAR},
+      create_ip = #{createIp,jdbcType=VARCHAR},
+      create_person = #{createPerson,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_person = #{updatePerson,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

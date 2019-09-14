@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/rest/payment")
+@RequestMapping("/pay/payment")
 @Api(tags = "1.1", description = "支付服务", value = "支付服务")
 public class PaymentController extends BaseController {
 

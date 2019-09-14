@@ -12,5 +12,7 @@ import lombok.Data;
 @Data
 public class PayReq {
 
+    private String  orderId;
+
 
 }
