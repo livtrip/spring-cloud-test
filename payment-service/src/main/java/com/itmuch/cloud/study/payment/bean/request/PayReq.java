@@ -1,6 +1,7 @@
 package com.itmuch.cloud.study.payment.bean.request;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Range;
 
 /**
  * 〈一句话功能简述〉<br>
@@ -12,7 +13,10 @@ import lombok.Data;
 @Data
 public class PayReq {
 
-    private String  orderId;
+    //类型 1：易  2：阿里云  3：腾讯云
+    @Range(min=1, max=3, message = "类型错误")
+    private Integer type;
+
 
 
 }

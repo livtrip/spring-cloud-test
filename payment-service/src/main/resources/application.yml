@@ -42,6 +42,66 @@ logging:
 ribbon:
   ReadTimeout: 6000
   SocketTimeout: 6000
+
+## 易宝支付配置信息
+yeepay:
+  server_root: https://openapi.yeepay.com/yop-center
+  pay_app_key: OPR:10025419533
+  app_key: SQKK10025419533
+  merchant_no: 10025419533
+  quick: SQKKSCENEKJ010
+  withhold: SQKKSCENE10
+  private_secret_key: MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCujqnrvvPwJCnLvonaqj6ydpLlKEIdjWONYj+vmxcWLDKGsT0DPF4Tj3mx1H+HBDajQPISzqRfUBtDIyqd0oIrC78xbx31I9Kf92F+W/0AS647+OlInfOfND8jjQG/6l/5Py+GtFaP99u4jHslnwIl+TpXFwxpmOm6vZ4dkH/JEhMYv12g5wzTbARFdvXL2B7fzDVLHyAbsRtDhl8xBb6dIF5dyQoB/X63kEGJbgAQBGlc2zWDvLVPlmSBU6ZEYhH3lGLJtJbGOZ5nIRy6ahAq2uzVfwB6zyhkqwCcr4bf50ebqpDChjfHvnVRk7jZZ1p5Aped122YwDdH/7+NYxaHAgMBAAECggEAT45L2Vr9OKxytB5SG+vNiW7LQk/X2jovbieiGPnZSsy39nVe9lOUGNwiPa84tCNyd3NJINM3TQ1ob2/eo3FmzBGdgP1ArRI3k5qev4VTSMg1T7YBNIxwlVWtlRlV+87pEOMAWSdl8FWpuXGlSp8uznnJYhnqGVKM7AQxxQ2vf8bQQzYbl1f2Arn4ECQ0Lk7p/3vHKFINYxb3KTCIQs8LsFuD5fdInRlxNOaEXYXh57MNcvfdNyOio7ZD2ATILXnju1RwUHSxPvVvfuiKmqxH0a+oiGqrFQomqGoFCTdx0ry35lU5O5criGz+VhTawX7ufB4cL/XIsgW/OswOa3dj2QKBgQDrpuA8CrPToXmsxVhrwMl5JSTR/UYYHFWPDrF5y4C2xVaES2hZ+h3kWNjCBsD7lhoBodgGTXx4YuddlLCzU6qFBrs7HE3ZAeWZ+9UaexnRncyhHvQOcMgF95bTBnCKGrUc/y64Z2Fcd+kkhZ3sZ5WCHgkQ3F/+0fiHwOpgBVylEwKBgQC9oUgoslMYVDRC5Tnrh/vZXVH5jHSTbOW/v+US5VL9gv8H/WLnCNvNtLWnMVZUQ9fUwkt+jSjictnm29UcqRliTKXwbl81y3hp002BF7wT0UZl55drkzWdxYglKOnPkzt8aP+Hrlqg6gZ4kHxrwT9jX2aT/zgW1WXfvfoMOBZbPQKBgGLq+7l4bJ/ral3hwQoKNQhLVTdob6HzUt7oNguAJxmRoI2L8dPDMAUIXoSjvSJekbAZtcp/gD4wlhosLjg4aJ3Kg5F+ghcTusN2eK/S+LWK3bjMe3oMUYpfscoHK/ps15XCcGQr0Sy1kQIprG7t1E54OSoAt7MJhJ/HlRqVZZxNAoGAHXqRCSKPoFyWsz+HPYIqOKQ1NiILjU+Ed8aRCdr0h8xxcQCG+3t5EAVjp9YXoYnaZ4y8x7OSA4HvNeA+xPHUrF9V/IZr7qTu1ySuC79w0XPbCcRy2ZpM33XxsDUoA8jTmoeIEcOc+x7mWp+7d9TW0c/m1mL6iTIrYBjcYkHl19ECgYB0j2EN8qiSoO/GIXIZG+Fbjm2IldT5j5Sbuq8+Oj765iudMFyHN6jWo5Oau9SlacX8teYsPAFMAQV9pSz/szxJQLD5l46bRMtYHjA/N/BYKcuDCo4zcfqeaOHWs+XmVGt9c0VvbwDVGUZ8lOW7hewaf5QucPiqNQCrKaD7RqQ0BA==
+  public_secret_key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6p0XWjscY+gsyqKRhw9MeLsEmhFdBRhT2emOck/F1Omw38ZWhJxh9kDfs5HzFJMrVozgU+SJFDONxs8UB0wMILKRmqfLcfClG9MyCNuJkkfm0HFQv1hRGdOvZPXj3Bckuwa7FrEXBRYUhK7vJ40afumspthmse6bs6mZxNn/mALZ2X07uznOrrc2rk41Y2HftduxZw6T4EmtWuN2x4CZ8gwSyPAW5ZzZJLQ6tZDojBK4GZTAGhnn3bg5bBsBlw2+FLkCQBuDsJVsFPiGh/b6K/+zGTvWyUcu+LUj2MejYQELDO3i2vQXVDk7lVi2/TcUYefvIcssnzsfCfjaorxsuwIDAQAB
+  # 回调地址相关
+  yeepay_callback_url: http://dev.api.kkd.51kirin.com/callback/repay/order/yeepayCallback
+  yeepay_callback_url_v2: http://dev.api.kkd.51kirin.com/callback/repay/order/yeepayCallback/v2
+  yeepay_withhold_callback: http://dev.api.kkd.51kirin.com/callback/repay/order/yeepayCallback/withhold
+
+  # 出款记录
+  transfer_send_uri: /rest/v1.0/balance/transfer_send
+  # 统一鉴权绑卡请求
+  auth_bind_card_req_uri: /rest/v1.0/paperorder/unified/auth/request
+  # 鉴权绑卡确认
+  auth_bind_card_confirm_uri: /rest/v1.0/paperorder/auth/confirm
+  # 鉴权绑卡重发
+  auth_bind_card_resend_uri: /rest/v1.0/paperorder/auth/resend
+  # 鉴权记录查询
+  auth_bind_card_query_uri: /rest/v1.0/paperorder/auth/query
+  # 解绑银行卡
+  unbind_uri: /rest/v1.0/paperorder/unbind/request
+  # 支付对账文件下载
+  temp_card_pay: /rest/v1.0/paperorder/api/accountcheck/tempcardpay
+  # 卡 bin查询
+  bank_card_query_uri: /rest/v1.0/paperorder/temppay/bankcardrecord
+  # 解绑请求
+  paper_order_unbind_uri: /rest/v1.0/paperorder/unbind/request
+  # 统一首次支付请求
+  union_first_pay_uri: /rest/v1.0/paperorder/unified/firstpay
+  # 首次支付短验确认
+  first_pay_sms_conf_uri: /rest/v1.0/paperorder/firstpayorder/confirm
+  # 首次支付短验重发
+  first_pay_sms_resend_uri: /rest/v1.0/paperorder/firstpayorder/resend
+
+  # 统一绑卡支付请求
+  bind_card_pay_uri: /rest/v1.0/paperorder/unified/pay
+  # 绑卡支付确认
+  bind_card_confirm_uri: /rest/v1.0/paperorder/pay/confirm
+  # 绑卡支付重发
+  bind_card_pay_resend_uri: /rest/v1.0/paperorder/pay/resend
+  # 绑卡支付查询
+  bind_card_pay_query_uri: /rest/v1.0/paperorder/api/pay/query
+
+  query_customer_amount_uri: /rest/v1.0/balance/query_customer_amount
+  # 无感知签约
+  auth_nonperceived_uri: rest/v1.0/paperorder/nonperceived/auth/request
+  # 查询地址
+  payment_query_uri: /rest/v1.0/balance/transfer_query
+  # 线下充值
+  offline_recharge: /rest/v1.0/std/eaccount/topup
+  # 充值回调
+  recharge_callback: http://dev.api.kkd.51kirin.com/callback/recharge/yeepayCallback
+
 # 调用远程微服务
 feign:
   remote:
