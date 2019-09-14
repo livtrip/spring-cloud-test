@@ -13,9 +13,11 @@ import org.hibernate.validator.constraints.Range;
 @Data
 public class PayReq {
 
-    //类型 1：易  2：阿里云  3：腾讯云
+    //类型 1：易宝  2：支付宝  3：微信
     @Range(min=1, max=3, message = "类型错误")
     private Integer type;
+
+
 
 
 
