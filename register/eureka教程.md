@@ -47,6 +47,16 @@ docker run -d --name myregister14  --expose=8761 -p 8761:8761   itmuch/register:
 
 ```
 
+* Eureka 注册失败
+```text
+1.问题一: registration status: 204?
+   Eureka客户端（服务提供者/消费者）没有成功引入web的starter。
+   如果pom文件中引入后，还需要真正被maven加载，程序才能真正引入
+   
+
+
+```
+
 
 
 * 参考资料
