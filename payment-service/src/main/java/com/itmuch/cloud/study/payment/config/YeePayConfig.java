@@ -1,5 +1,6 @@
 package com.itmuch.cloud.study.payment.config;
 
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -12,9 +13,14 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConfigurationProperties(prefix = "yeepay")
+@Data
 public class YeePayConfig {
 
     private String serverRoot;
+
+    private String privateSecretKey;
+
+    private String publicSecretKey;
 
     private String payAppKey;
 
@@ -26,7 +32,7 @@ public class YeePayConfig {
 
     private String withhold;
 
-    private String yeepaCallbackUrl;
+    private String yeepayCallbackUrl;
 
     private String yeepayCallbackUrlV2;
 
@@ -36,13 +42,13 @@ public class YeePayConfig {
     // 出款记录
     private String  transferSendUri;
     // 统一鉴权绑卡请求
-    private String  authBindCard_reqUri;
+    private String  authBindCardReqUri;
      // 鉴权绑卡确认
      private String  authBindCardConfirmUri;
     // 鉴权绑卡重发
-    private String  authBindCard_resendUri;
+    private String  authBindCardResendUri;
     // 鉴权记录查询
-    private String  authBindCard_queryUri;
+    private String  authBindCardQueryUri;
     
     
      // 解绑银行卡
@@ -72,7 +78,7 @@ public class YeePayConfig {
 
     private String queryCustomerAmountUri;
     // 无感知签约
-    private String authNonperceivedUri;
+    private String authNonPerceivedUri;
     // 查询地址
     private String paymentQueryUri;
     // 线下充值
