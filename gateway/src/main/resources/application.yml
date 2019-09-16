@@ -43,3 +43,6 @@ zuul:
     payment-service:
       path: /payment/**
       serviceId: payment-service
+    coupon-service:
+      path: /coupon/**
+      serviceId: coupon-service

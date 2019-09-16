@@ -22,12 +22,12 @@ mybatis:
 # eureka
 eureka:
   instance:
-    hostname: 111.231.189.44
+    hostname: 172.16.63.228
     appname: payment-service
-    instance-id: http://111.231.189.44:${server.port}
+    instance-id: http://172.16.63.228:${server.port}
     prefer-ip-address: true
     health-check-url-path: /health
-    ip-address: 111.231.189.44
+    ip-address: 172.16.63.228
   client:
     service-url:
        defaultZone: http://111.231.189.44:8761/eureka

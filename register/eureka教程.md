@@ -47,6 +47,27 @@ docker run -d --name myregister14  --expose=8761 -p 8761:8761   itmuch/register:
 
 ```
 
+```yaml
+# eureka
+eureka:
+  instance:
+    hostname: 172.16.63.228  #实例所在的机器 IP
+    appname: account-service
+    instance-id: http://172.16.63.228:${server.port} #实例所在的机器 IP
+    prefer-ip-address: true
+    ip-address: 172.16.63.228   #实例所在的机器 IP
+    health-check-url-path: /health
+  client:
+    # 是否注册到eureka
+    register-with-eureka: true
+    # 是否从eureka获取注册信息
+    fetch-registry: true
+    # eureka服务器的地址
+    service-url:
+       defaultZone: http://111.231.189.44:8761/eureka #eureka实例所在的机器IP
+```
+
+
 * Eureka 注册失败
 ```text
 1.问题一: registration status: 204?

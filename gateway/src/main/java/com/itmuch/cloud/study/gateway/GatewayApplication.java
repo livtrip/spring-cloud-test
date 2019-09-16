@@ -39,6 +39,7 @@ public class GatewayApplication {
             resources.add(swaggerResource("commodity-service", "/api/commodity/v2/api-docs", "2.0"));
             resources.add(swaggerResource("payment-service", "/api/payment/v2/api-docs", "2.0"));
             resources.add(swaggerResource("account-service", "/api/account/v2/api-docs", "2.0"));
+            resources.add(swaggerResource("coupon-service", "/api/account/v2/api-docs", "2.0"));
             return resources;
         }
 
