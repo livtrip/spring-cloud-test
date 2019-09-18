@@ -25,6 +25,6 @@
     </root>
 
     <!-- logback为java中的包 -->
-    <logger name="com.itmuch.cloud.study"/>
+    <logger name="com.itmuch.cloud.study.payment"/>
 
 </configuration>
