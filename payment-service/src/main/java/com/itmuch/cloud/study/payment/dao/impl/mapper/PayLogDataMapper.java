@@ -2,7 +2,6 @@ package com.itmuch.cloud.study.payment.dao.impl.mapper;
 
 import com.itmuch.cloud.study.payment.entity.PayLogData;
 import com.itmuch.cloud.study.payment.entity.PayLogDataExample;
-import com.itmuch.cloud.study.payment.entity.PayLogDataWithBLOBs;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -15,25 +14,19 @@ public interface PayLogDataMapper {
 
     int deleteByPrimaryKey(Long id);
 
-    int insert(PayLogDataWithBLOBs record);
+    int insert(PayLogData record);
 
-    int insertSelective(PayLogDataWithBLOBs record);
-
-    List<PayLogDataWithBLOBs> selectByExampleWithBLOBs(PayLogDataExample example);
+    int insertSelective(PayLogData record);
 
     List<PayLogData> selectByExample(PayLogDataExample example);
 
-    PayLogDataWithBLOBs selectByPrimaryKey(Long id);
+    PayLogData selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(@Param("record") PayLogDataWithBLOBs record, @Param("example") PayLogDataExample example);
-
-    int updateByExampleWithBLOBs(@Param("record") PayLogDataWithBLOBs record, @Param("example") PayLogDataExample example);
+    int updateByExampleSelective(@Param("record") PayLogData record, @Param("example") PayLogDataExample example);
 
     int updateByExample(@Param("record") PayLogData record, @Param("example") PayLogDataExample example);
 
-    int updateByPrimaryKeySelective(PayLogDataWithBLOBs record);
-
-    int updateByPrimaryKeyWithBLOBs(PayLogDataWithBLOBs record);
+    int updateByPrimaryKeySelective(PayLogData record);
 
     int updateByPrimaryKey(PayLogData record);
 }

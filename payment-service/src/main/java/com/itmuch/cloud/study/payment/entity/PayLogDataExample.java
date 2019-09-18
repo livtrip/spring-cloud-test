@@ -395,6 +395,146 @@ public class PayLogDataExample {
             return (Criteria) this;
         }
 
+        public Criteria andRequestHeaderIsNull() {
+            addCriterion("request_header is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestHeaderIsNotNull() {
+            addCriterion("request_header is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestHeaderEqualTo(String value) {
+            addCriterion("request_header =", value, "requestHeader");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestHeaderNotEqualTo(String value) {
+            addCriterion("request_header <>", value, "requestHeader");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestHeaderGreaterThan(String value) {
+            addCriterion("request_header >", value, "requestHeader");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestHeaderGreaterThanOrEqualTo(String value) {
+            addCriterion("request_header >=", value, "requestHeader");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestHeaderLessThan(String value) {
+            addCriterion("request_header <", value, "requestHeader");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestHeaderLessThanOrEqualTo(String value) {
+            addCriterion("request_header <=", value, "requestHeader");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestHeaderLike(String value) {
+            addCriterion("request_header like", value, "requestHeader");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestHeaderNotLike(String value) {
+            addCriterion("request_header not like", value, "requestHeader");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestHeaderIn(List<String> values) {
+            addCriterion("request_header in", values, "requestHeader");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestHeaderNotIn(List<String> values) {
+            addCriterion("request_header not in", values, "requestHeader");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestHeaderBetween(String value1, String value2) {
+            addCriterion("request_header between", value1, value2, "requestHeader");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestHeaderNotBetween(String value1, String value2) {
+            addCriterion("request_header not between", value1, value2, "requestHeader");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestParamsIsNull() {
+            addCriterion("request_params is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestParamsIsNotNull() {
+            addCriterion("request_params is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestParamsEqualTo(String value) {
+            addCriterion("request_params =", value, "requestParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestParamsNotEqualTo(String value) {
+            addCriterion("request_params <>", value, "requestParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestParamsGreaterThan(String value) {
+            addCriterion("request_params >", value, "requestParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestParamsGreaterThanOrEqualTo(String value) {
+            addCriterion("request_params >=", value, "requestParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestParamsLessThan(String value) {
+            addCriterion("request_params <", value, "requestParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestParamsLessThanOrEqualTo(String value) {
+            addCriterion("request_params <=", value, "requestParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestParamsLike(String value) {
+            addCriterion("request_params like", value, "requestParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestParamsNotLike(String value) {
+            addCriterion("request_params not like", value, "requestParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestParamsIn(List<String> values) {
+            addCriterion("request_params in", values, "requestParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestParamsNotIn(List<String> values) {
+            addCriterion("request_params not in", values, "requestParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestParamsBetween(String value1, String value2) {
+            addCriterion("request_params between", value1, value2, "requestParams");
+            return (Criteria) this;
+        }
+
+        public Criteria andRequestParamsNotBetween(String value1, String value2) {
+            addCriterion("request_params not between", value1, value2, "requestParams");
+            return (Criteria) this;
+        }
+
         public Criteria andLogTypeIsNull() {
             addCriterion("log_type is null");
             return (Criteria) this;

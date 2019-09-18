@@ -1,7 +1,8 @@
 package com.itmuch.cloud.study.payment.dao.impl;
 
-import com.itmuch.cloud.study.common.util.Page.Page;
-import com.itmuch.cloud.study.common.util.Page.PageUtil;
+
+import com.itmuch.cloud.study.common.util.Page;
+import com.itmuch.cloud.study.common.util.PageUtil;
 import com.itmuch.cloud.study.payment.dao.PayLogDataDao;
 import com.itmuch.cloud.study.payment.dao.impl.mapper.PayLogDataMapper;
 import com.itmuch.cloud.study.payment.entity.PayLogData;
@@ -36,7 +37,7 @@ public class PayLogDataDaoImpl implements PayLogDataDao {
     }
 
     public int updateByPrimaryKey(PayLogData record) {
-        return this.payLogDataMapper.updateByPrimaryKeyWithoutBLOBs(record);
+        return this.payLogDataMapper.updateByPrimaryKey(record);
     }
 
     public int updateByExampleSelective(PayLogData record, PayLogDataExample example) {
@@ -44,11 +45,11 @@ public class PayLogDataDaoImpl implements PayLogDataDao {
     }
 
     public int updateByExample(PayLogData record, PayLogDataExample example) {
-        return this.payLogDataMapper.updateByExampleWithoutBLOBs(record, example);
+        return this.payLogDataMapper.updateByExample(record, example);
     }
 
     public List<PayLogData> listByExample(PayLogDataExample example) {
-        return this.payLogDataMapper.selectByExampleWithoutBLOBs(example);
+        return this.payLogDataMapper.selectByExample(example);
     }
 
     public PayLogData getById(Long id) {

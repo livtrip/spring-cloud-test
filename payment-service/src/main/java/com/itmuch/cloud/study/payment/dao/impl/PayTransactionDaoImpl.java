@@ -1,7 +1,7 @@
 package com.itmuch.cloud.study.payment.dao.impl;
 
-import com.itmuch.cloud.study.common.util.Page.Page;
-import com.itmuch.cloud.study.common.util.Page.PageUtil;
+import com.itmuch.cloud.study.common.util.Page;
+import com.itmuch.cloud.study.common.util.PageUtil;
 import com.itmuch.cloud.study.payment.dao.PayTransactionDao;
 import com.itmuch.cloud.study.payment.dao.impl.mapper.PayTransactionMapper;
 import com.itmuch.cloud.study.payment.entity.PayTransaction;

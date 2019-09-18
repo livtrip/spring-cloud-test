@@ -12,6 +12,10 @@ public class PayLogData implements Serializable {
 
     private String transactionId;
 
+    private String requestHeader;
+
+    private String requestParams;
+
     private String logType;
 
     private String createIp;
@@ -56,6 +60,22 @@ public class PayLogData implements Serializable {
 
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId == null ? null : transactionId.trim();
+    }
+
+    public String getRequestHeader() {
+        return requestHeader;
+    }
+
+    public void setRequestHeader(String requestHeader) {
+        this.requestHeader = requestHeader == null ? null : requestHeader.trim();
+    }
+
+    public String getRequestParams() {
+        return requestParams;
+    }
+
+    public void setRequestParams(String requestParams) {
+        this.requestParams = requestParams == null ? null : requestParams.trim();
     }
 
     public String getLogType() {
@@ -116,6 +136,8 @@ public class PayLogData implements Serializable {
         sb.append(", appId=").append(appId);
         sb.append(", appOrderId=").append(appOrderId);
         sb.append(", transactionId=").append(transactionId);
+        sb.append(", requestHeader=").append(requestHeader);
+        sb.append(", requestParams=").append(requestParams);
         sb.append(", logType=").append(logType);
         sb.append(", createIp=").append(createIp);
         sb.append(", createPerson=").append(createPerson);

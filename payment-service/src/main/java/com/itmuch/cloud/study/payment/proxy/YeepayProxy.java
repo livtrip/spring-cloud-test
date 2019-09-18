@@ -18,7 +18,6 @@ public class YeepayProxy extends  BaseProxy implements PayProxy {
     @Override
     public PayLogData buildPayLogData(PayReq payReq) {
         PayLogData payLogData = new PayLogData();
-        payLogData.setAppOrderId(payReq.getOrderId());
         return payLogData;
     }
 

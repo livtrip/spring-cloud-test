@@ -6,16 +6,14 @@
     <result column="app_id" property="appId" jdbcType="VARCHAR" />
     <result column="app_order_id" property="appOrderId" jdbcType="VARCHAR" />
     <result column="transaction_id" property="transactionId" jdbcType="VARCHAR" />
+    <result column="request_header" property="requestHeader" jdbcType="VARCHAR" />
+    <result column="request_params" property="requestParams" jdbcType="VARCHAR" />
     <result column="log_type" property="logType" jdbcType="VARCHAR" />
     <result column="create_ip" property="createIp" jdbcType="VARCHAR" />
     <result column="create_person" property="createPerson" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_person" property="updatePerson" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.itmuch.cloud.study.payment.entity.PayLogDataWithBLOBs" extends="BaseResultMap" >
-    <result column="request_header" property="requestHeader" jdbcType="LONGVARCHAR" />
-    <result column="request_params" property="requestParams" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -76,28 +74,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, app_id, app_order_id, transaction_id, log_type, create_ip, create_person, create_time, 
-    update_person, update_time
+    id, app_id, app_order_id, transaction_id, request_header, request_params, log_type, 
+    create_ip, create_person, create_time, update_person, update_time
   </sql>
-  <sql id="Blob_Column_List" >
-    request_header, request_params
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.itmuch.cloud.study.payment.entity.PayLogDataExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from tb_pay_log_data
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itmuch.cloud.study.payment.entity.PayLogDataExample" >
     select
     <if test="distinct" >
@@ -115,11 +94,9 @@
       limit ${limitStart} , ${pageSize}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from tb_pay_log_data
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -133,19 +110,19 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.itmuch.cloud.study.payment.entity.PayLogDataWithBLOBs" >
+  <insert id="insert" parameterType="com.itmuch.cloud.study.payment.entity.PayLogData" >
     insert into tb_pay_log_data (id, app_id, app_order_id, 
-      transaction_id, log_type, create_ip, 
-      create_person, create_time, update_person, 
-      update_time, request_header, request_params
+      transaction_id, request_header, request_params, 
+      log_type, create_ip, create_person, 
+      create_time, update_person, update_time
       )
     values (#{id,jdbcType=BIGINT}, #{appId,jdbcType=VARCHAR}, #{appOrderId,jdbcType=VARCHAR}, 
-      #{transactionId,jdbcType=VARCHAR}, #{logType,jdbcType=VARCHAR}, #{createIp,jdbcType=VARCHAR}, 
-      #{createPerson,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{requestHeader,jdbcType=LONGVARCHAR}, #{requestParams,jdbcType=LONGVARCHAR}
+      #{transactionId,jdbcType=VARCHAR}, #{requestHeader,jdbcType=VARCHAR}, #{requestParams,jdbcType=VARCHAR}, 
+      #{logType,jdbcType=VARCHAR}, #{createIp,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.itmuch.cloud.study.payment.entity.PayLogDataWithBLOBs" >
+  <insert id="insertSelective" parameterType="com.itmuch.cloud.study.payment.entity.PayLogData" >
     insert into tb_pay_log_data
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -159,6 +136,12 @@
       </if>
       <if test="transactionId != null" >
         transaction_id,
+      </if>
+      <if test="requestHeader != null" >
+        request_header,
+      </if>
+      <if test="requestParams != null" >
+        request_params,
       </if>
       <if test="logType != null" >
         log_type,
@@ -178,12 +161,6 @@
       <if test="updateTime != null" >
         update_time,
       </if>
-      <if test="requestHeader != null" >
-        request_header,
-      </if>
-      <if test="requestParams != null" >
-        request_params,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -197,6 +174,12 @@
       </if>
       <if test="transactionId != null" >
         #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="requestHeader != null" >
+        #{requestHeader,jdbcType=VARCHAR},
+      </if>
+      <if test="requestParams != null" >
+        #{requestParams,jdbcType=VARCHAR},
       </if>
       <if test="logType != null" >
         #{logType,jdbcType=VARCHAR},
@@ -215,12 +198,6 @@
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="requestHeader != null" >
-        #{requestHeader,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="requestParams != null" >
-        #{requestParams,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -245,6 +222,12 @@
       <if test="record.transactionId != null" >
         transaction_id = #{record.transactionId,jdbcType=VARCHAR},
       </if>
+      <if test="record.requestHeader != null" >
+        request_header = #{record.requestHeader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requestParams != null" >
+        request_params = #{record.requestParams,jdbcType=VARCHAR},
+      </if>
       <if test="record.logType != null" >
         log_type = #{record.logType,jdbcType=VARCHAR},
       </if>
@@ -263,31 +246,7 @@
       <if test="record.updateTime != null" >
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.requestHeader != null" >
-        request_header = #{record.requestHeader,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="record.requestParams != null" >
-        request_params = #{record.requestParams,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update tb_pay_log_data
-    set id = #{record.id,jdbcType=BIGINT},
-      app_id = #{record.appId,jdbcType=VARCHAR},
-      app_order_id = #{record.appOrderId,jdbcType=VARCHAR},
-      transaction_id = #{record.transactionId,jdbcType=VARCHAR},
-      log_type = #{record.logType,jdbcType=VARCHAR},
-      create_ip = #{record.createIp,jdbcType=VARCHAR},
-      create_person = #{record.createPerson,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      update_person = #{record.updatePerson,jdbcType=VARCHAR},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      request_header = #{record.requestHeader,jdbcType=LONGVARCHAR},
-      request_params = #{record.requestParams,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -298,6 +257,8 @@
       app_id = #{record.appId,jdbcType=VARCHAR},
       app_order_id = #{record.appOrderId,jdbcType=VARCHAR},
       transaction_id = #{record.transactionId,jdbcType=VARCHAR},
+      request_header = #{record.requestHeader,jdbcType=VARCHAR},
+      request_params = #{record.requestParams,jdbcType=VARCHAR},
       log_type = #{record.logType,jdbcType=VARCHAR},
       create_ip = #{record.createIp,jdbcType=VARCHAR},
       create_person = #{record.createPerson,jdbcType=VARCHAR},
@@ -308,7 +269,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.itmuch.cloud.study.payment.entity.PayLogDataWithBLOBs" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.itmuch.cloud.study.payment.entity.PayLogData" >
     update tb_pay_log_data
     <set >
       <if test="appId != null" >
@@ -319,6 +280,12 @@
       </if>
       <if test="transactionId != null" >
         transaction_id = #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="requestHeader != null" >
+        request_header = #{requestHeader,jdbcType=VARCHAR},
+      </if>
+      <if test="requestParams != null" >
+        request_params = #{requestParams,jdbcType=VARCHAR},
       </if>
       <if test="logType != null" >
         log_type = #{logType,jdbcType=VARCHAR},
@@ -338,28 +305,7 @@
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="requestHeader != null" >
-        request_header = #{requestHeader,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="requestParams != null" >
-        request_params = #{requestParams,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.itmuch.cloud.study.payment.entity.PayLogDataWithBLOBs" >
-    update tb_pay_log_data
-    set app_id = #{appId,jdbcType=VARCHAR},
-      app_order_id = #{appOrderId,jdbcType=VARCHAR},
-      transaction_id = #{transactionId,jdbcType=VARCHAR},
-      log_type = #{logType,jdbcType=VARCHAR},
-      create_ip = #{createIp,jdbcType=VARCHAR},
-      create_person = #{createPerson,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_person = #{updatePerson,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      request_header = #{requestHeader,jdbcType=LONGVARCHAR},
-      request_params = #{requestParams,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.itmuch.cloud.study.payment.entity.PayLogData" >
@@ -367,6 +313,8 @@
     set app_id = #{appId,jdbcType=VARCHAR},
       app_order_id = #{appOrderId,jdbcType=VARCHAR},
       transaction_id = #{transactionId,jdbcType=VARCHAR},
+      request_header = #{requestHeader,jdbcType=VARCHAR},
+      request_params = #{requestParams,jdbcType=VARCHAR},
       log_type = #{logType,jdbcType=VARCHAR},
       create_ip = #{createIp,jdbcType=VARCHAR},
       create_person = #{createPerson,jdbcType=VARCHAR},

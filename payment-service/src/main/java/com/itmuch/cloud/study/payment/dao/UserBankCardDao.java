@@ -1,6 +1,6 @@
 package com.itmuch.cloud.study.payment.dao;
 
-import com.itmuch.cloud.study.common.util.Page.Page;
+import com.itmuch.cloud.study.common.util.Page;
 import com.itmuch.cloud.study.payment.entity.UserBankCard;
 import com.itmuch.cloud.study.payment.entity.UserBankCardExample;
 import java.util.List;
