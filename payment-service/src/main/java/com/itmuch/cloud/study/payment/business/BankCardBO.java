@@ -38,7 +38,7 @@ public class BankCardBO {
         try {
             CardBinRes CardBinRes = new CardBinRes();
                 Map<String, String> params = new HashMap<>(16);
-                params.put("merchantno", yeePayConfig.getPublicSecretKey());
+                params.put("merchantno", yeePayConfig.getPrivateSecretKey());
                 params.put("cardno", CardBinReq.getBankNo());
                 Map<String, String> yopresponsemap = YeepayService.yeepayYOP(params, yeePayConfig.getBankCardQueryUri(), yeePayConfig.getAppKey(), yeePayConfig.getPrivateSecretKey());
                 if (yopresponsemap.get("errormsg") == null) {

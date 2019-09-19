@@ -35,7 +35,7 @@ public class BankController {
     private BankCardBO bankCardBO;
 
 
-    @ApiOperation(value = "checkBankBin", notes = "查询卡bin")
+    @ApiOperation(value = "checkBankBin", notes = "校验卡")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户ID", dataType = ApiDataType.LONG, paramType = ApiParamType.QUERY),
             @ApiImplicitParam(name = "bankNo", value = "银行卡号", dataType = ApiDataType.STRING, paramType = ApiParamType.QUERY)
