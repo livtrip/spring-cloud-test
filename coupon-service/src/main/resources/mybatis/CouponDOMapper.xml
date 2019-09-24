@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itmuch.cloud.study.coupon.dao.impl.mapper.CouponDOMapper" >
+  <resultMap id="BaseResultMap" type="com.itmuch.cloud.study.coupon.entity.CouponDO" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="off_define" property="offDefine" jdbcType="VARCHAR" />
+    <result column="discount" property="discount" jdbcType="INTEGER" />
+    <result column="random_define" property="randomDefine" jdbcType="VARCHAR" />
+    <result column="cycle" property="cycle" jdbcType="INTEGER" />
+    <result column="cycle_unit" property="cycleUnit" jdbcType="INTEGER" />
+    <result column="apply_area" property="applyArea" jdbcType="VARCHAR" />
+    <result column="apply_store" property="applyStore" jdbcType="VARCHAR" />
+    <result column="apply_brand" property="applyBrand" jdbcType="VARCHAR" />
+    <result column="apply_first_category" property="applyFirstCategory" jdbcType="VARCHAR" />
+    <result column="apply_second_category" property="applySecondCategory" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="obtain_rule" property="obtainRule" jdbcType="VARCHAR" />
+    <result column="number_limit" property="numberLimit" jdbcType="INTEGER" />
+    <result column="refund_policy" property="refundPolicy" jdbcType="INTEGER" />
+    <result column="point_cost" property="pointCost" jdbcType="INTEGER" />
+    <result column="exchange_code_number" property="exchangeCodeNumber" jdbcType="INTEGER" />
+    <result column="create_person" property="createPerson" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_person" property="updatePerson" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, code, name, description, type, status, off_define, discount, random_define, cycle, 
+    cycle_unit, apply_area, apply_store, apply_brand, apply_first_category, apply_second_category, 
+    start_time, end_time, obtain_rule, number_limit, refund_policy, point_cost, exchange_code_number, 
+    create_person, create_time, update_person, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itmuch.cloud.study.coupon.entity.CouponDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_coupon
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_coupon
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_coupon
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itmuch.cloud.study.coupon.entity.CouponDOExample" >
+    delete from tb_coupon
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itmuch.cloud.study.coupon.entity.CouponDO" >
+    insert into tb_coupon (id, code, name, 
+      description, type, status, 
+      off_define, discount, random_define, 
+      cycle, cycle_unit, apply_area, 
+      apply_store, apply_brand, apply_first_category, 
+      apply_second_category, start_time, end_time, 
+      obtain_rule, number_limit, refund_policy, 
+      point_cost, exchange_code_number, create_person, 
+      create_time, update_person, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{offDefine,jdbcType=VARCHAR}, #{discount,jdbcType=INTEGER}, #{randomDefine,jdbcType=VARCHAR}, 
+      #{cycle,jdbcType=INTEGER}, #{cycleUnit,jdbcType=INTEGER}, #{applyArea,jdbcType=VARCHAR}, 
+      #{applyStore,jdbcType=VARCHAR}, #{applyBrand,jdbcType=VARCHAR}, #{applyFirstCategory,jdbcType=VARCHAR}, 
+      #{applySecondCategory,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{obtainRule,jdbcType=VARCHAR}, #{numberLimit,jdbcType=INTEGER}, #{refundPolicy,jdbcType=INTEGER}, 
+      #{pointCost,jdbcType=INTEGER}, #{exchangeCodeNumber,jdbcType=INTEGER}, #{createPerson,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.itmuch.cloud.study.coupon.entity.CouponDO" >
+    insert into tb_coupon
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="offDefine != null" >
+        off_define,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="randomDefine != null" >
+        random_define,
+      </if>
+      <if test="cycle != null" >
+        cycle,
+      </if>
+      <if test="cycleUnit != null" >
+        cycle_unit,
+      </if>
+      <if test="applyArea != null" >
+        apply_area,
+      </if>
+      <if test="applyStore != null" >
+        apply_store,
+      </if>
+      <if test="applyBrand != null" >
+        apply_brand,
+      </if>
+      <if test="applyFirstCategory != null" >
+        apply_first_category,
+      </if>
+      <if test="applySecondCategory != null" >
+        apply_second_category,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="obtainRule != null" >
+        obtain_rule,
+      </if>
+      <if test="numberLimit != null" >
+        number_limit,
+      </if>
+      <if test="refundPolicy != null" >
+        refund_policy,
+      </if>
+      <if test="pointCost != null" >
+        point_cost,
+      </if>
+      <if test="exchangeCodeNumber != null" >
+        exchange_code_number,
+      </if>
+      <if test="createPerson != null" >
+        create_person,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updatePerson != null" >
+        update_person,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="offDefine != null" >
+        #{offDefine,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=INTEGER},
+      </if>
+      <if test="randomDefine != null" >
+        #{randomDefine,jdbcType=VARCHAR},
+      </if>
+      <if test="cycle != null" >
+        #{cycle,jdbcType=INTEGER},
+      </if>
+      <if test="cycleUnit != null" >
+        #{cycleUnit,jdbcType=INTEGER},
+      </if>
+      <if test="applyArea != null" >
+        #{applyArea,jdbcType=VARCHAR},
+      </if>
+      <if test="applyStore != null" >
+        #{applyStore,jdbcType=VARCHAR},
+      </if>
+      <if test="applyBrand != null" >
+        #{applyBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="applyFirstCategory != null" >
+        #{applyFirstCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="applySecondCategory != null" >
+        #{applySecondCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="obtainRule != null" >
+        #{obtainRule,jdbcType=VARCHAR},
+      </if>
+      <if test="numberLimit != null" >
+        #{numberLimit,jdbcType=INTEGER},
+      </if>
+      <if test="refundPolicy != null" >
+        #{refundPolicy,jdbcType=INTEGER},
+      </if>
+      <if test="pointCost != null" >
+        #{pointCost,jdbcType=INTEGER},
+      </if>
+      <if test="exchangeCodeNumber != null" >
+        #{exchangeCodeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="createPerson != null" >
+        #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePerson != null" >
+        #{updatePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itmuch.cloud.study.coupon.entity.CouponDOExample" resultType="java.lang.Integer" >
+    select count(*) from tb_coupon
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_coupon
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.offDefine != null" >
+        off_define = #{record.offDefine,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discount != null" >
+        discount = #{record.discount,jdbcType=INTEGER},
+      </if>
+      <if test="record.randomDefine != null" >
+        random_define = #{record.randomDefine,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cycle != null" >
+        cycle = #{record.cycle,jdbcType=INTEGER},
+      </if>
+      <if test="record.cycleUnit != null" >
+        cycle_unit = #{record.cycleUnit,jdbcType=INTEGER},
+      </if>
+      <if test="record.applyArea != null" >
+        apply_area = #{record.applyArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyStore != null" >
+        apply_store = #{record.applyStore,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyBrand != null" >
+        apply_brand = #{record.applyBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyFirstCategory != null" >
+        apply_first_category = #{record.applyFirstCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applySecondCategory != null" >
+        apply_second_category = #{record.applySecondCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.obtainRule != null" >
+        obtain_rule = #{record.obtainRule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.numberLimit != null" >
+        number_limit = #{record.numberLimit,jdbcType=INTEGER},
+      </if>
+      <if test="record.refundPolicy != null" >
+        refund_policy = #{record.refundPolicy,jdbcType=INTEGER},
+      </if>
+      <if test="record.pointCost != null" >
+        point_cost = #{record.pointCost,jdbcType=INTEGER},
+      </if>
+      <if test="record.exchangeCodeNumber != null" >
+        exchange_code_number = #{record.exchangeCodeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.createPerson != null" >
+        create_person = #{record.createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatePerson != null" >
+        update_person = #{record.updatePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_coupon
+    set id = #{record.id,jdbcType=BIGINT},
+      code = #{record.code,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      off_define = #{record.offDefine,jdbcType=VARCHAR},
+      discount = #{record.discount,jdbcType=INTEGER},
+      random_define = #{record.randomDefine,jdbcType=VARCHAR},
+      cycle = #{record.cycle,jdbcType=INTEGER},
+      cycle_unit = #{record.cycleUnit,jdbcType=INTEGER},
+      apply_area = #{record.applyArea,jdbcType=VARCHAR},
+      apply_store = #{record.applyStore,jdbcType=VARCHAR},
+      apply_brand = #{record.applyBrand,jdbcType=VARCHAR},
+      apply_first_category = #{record.applyFirstCategory,jdbcType=VARCHAR},
+      apply_second_category = #{record.applySecondCategory,jdbcType=VARCHAR},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      obtain_rule = #{record.obtainRule,jdbcType=VARCHAR},
+      number_limit = #{record.numberLimit,jdbcType=INTEGER},
+      refund_policy = #{record.refundPolicy,jdbcType=INTEGER},
+      point_cost = #{record.pointCost,jdbcType=INTEGER},
+      exchange_code_number = #{record.exchangeCodeNumber,jdbcType=INTEGER},
+      create_person = #{record.createPerson,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_person = #{record.updatePerson,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itmuch.cloud.study.coupon.entity.CouponDO" >
+    update tb_coupon
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="offDefine != null" >
+        off_define = #{offDefine,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=INTEGER},
+      </if>
+      <if test="randomDefine != null" >
+        random_define = #{randomDefine,jdbcType=VARCHAR},
+      </if>
+      <if test="cycle != null" >
+        cycle = #{cycle,jdbcType=INTEGER},
+      </if>
+      <if test="cycleUnit != null" >
+        cycle_unit = #{cycleUnit,jdbcType=INTEGER},
+      </if>
+      <if test="applyArea != null" >
+        apply_area = #{applyArea,jdbcType=VARCHAR},
+      </if>
+      <if test="applyStore != null" >
+        apply_store = #{applyStore,jdbcType=VARCHAR},
+      </if>
+      <if test="applyBrand != null" >
+        apply_brand = #{applyBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="applyFirstCategory != null" >
+        apply_first_category = #{applyFirstCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="applySecondCategory != null" >
+        apply_second_category = #{applySecondCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="obtainRule != null" >
+        obtain_rule = #{obtainRule,jdbcType=VARCHAR},
+      </if>
+      <if test="numberLimit != null" >
+        number_limit = #{numberLimit,jdbcType=INTEGER},
+      </if>
+      <if test="refundPolicy != null" >
+        refund_policy = #{refundPolicy,jdbcType=INTEGER},
+      </if>
+      <if test="pointCost != null" >
+        point_cost = #{pointCost,jdbcType=INTEGER},
+      </if>
+      <if test="exchangeCodeNumber != null" >
+        exchange_code_number = #{exchangeCodeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="createPerson != null" >
+        create_person = #{createPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePerson != null" >
+        update_person = #{updatePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itmuch.cloud.study.coupon.entity.CouponDO" >
+    update tb_coupon
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      off_define = #{offDefine,jdbcType=VARCHAR},
+      discount = #{discount,jdbcType=INTEGER},
+      random_define = #{randomDefine,jdbcType=VARCHAR},
+      cycle = #{cycle,jdbcType=INTEGER},
+      cycle_unit = #{cycleUnit,jdbcType=INTEGER},
+      apply_area = #{applyArea,jdbcType=VARCHAR},
+      apply_store = #{applyStore,jdbcType=VARCHAR},
+      apply_brand = #{applyBrand,jdbcType=VARCHAR},
+      apply_first_category = #{applyFirstCategory,jdbcType=VARCHAR},
+      apply_second_category = #{applySecondCategory,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      obtain_rule = #{obtainRule,jdbcType=VARCHAR},
+      number_limit = #{numberLimit,jdbcType=INTEGER},
+      refund_policy = #{refundPolicy,jdbcType=INTEGER},
+      point_cost = #{pointCost,jdbcType=INTEGER},
+      exchange_code_number = #{exchangeCodeNumber,jdbcType=INTEGER},
+      create_person = #{createPerson,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_person = #{updatePerson,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
