@@ -310,10 +310,10 @@ public class EncryptUtil {
 //        String test = encryptHex("test", "1234567800000000");
 //        System.out.println(test);
 
-//        String price = "40dd88e115aab34ffa949dfb245e8e97";
-//        String password = "46356afe55fa3cea9cbe73ad442cad47";
-        String price = "2bfb7f97465bcbe1e4fb8339285039a2";
-        String password = "ef71126d59ee474682dd9011bab7f240";
+        String price = "40dd88e115aab34ffa949dfb245e8e97";
+        String password = "46356afe55fa3cea9cbe73ad442cad47";
+//        String price = "2bfb7f97465bcbe1e4fb8339285039a2";
+//        String password = "ef71126d59ee474682dd9011bab7f240";
         System.out.println(decryptHex(price, password));
     }
 
