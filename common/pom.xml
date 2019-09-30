@@ -201,6 +201,12 @@
             <artifactId>servo-core</artifactId>
             <version>0.12.7</version>
         </dependency>
+        <!--百度OCR-->
+        <dependency>
+            <groupId>com.baidu.aip</groupId>
+            <artifactId>java-sdk</artifactId>
+            <version>4.5.0</version>
+        </dependency>
     </dependencies>
 
     <build>

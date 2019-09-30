@@ -64,4 +64,12 @@ public final class ConfigUtil {
 	public static final String ALIYUN_BUCKET_NAME= getProperty("aliyun.bucket.name");
 
 
+	public static final String BAIDU_OCR_APP_ID= getProperty("baidu.ocr.app.id");
+	public static final String BAIDU_OCR_APP_KEY= getProperty("baidu.ocr.app.key");
+	public static final String BAIDU_OCR_SECRET_KEY= getProperty("baidu.ocr.secret.key");
+
+
+
+
+
 }
