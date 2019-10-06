@@ -25,7 +25,8 @@ public class OcrUtilTest {
 
         try {
             String path  = ResourceUtils.getFile("classpath:static/business.png").getAbsolutePath();
-            System.out.println(OcrUtil.parseLicence(path));
+            String path1 = "/Users/mark1xie/workspace-cloud/spring-cloud-test-v/common/src/main/resources/static/business.png";
+            System.out.println(OcrUtil.parseLicence(path1));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

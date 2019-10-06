@@ -120,6 +120,7 @@ public class OcrUtil {
         Map<String, Object> result = new HashMap<>();
         try {
             JSONObject res2 = apiOcr.basicGeneral(path, new HashMap<String, String>());
+            System.out.println(res2.toString());
             JSONArray res = (JSONArray) res2.get("words_result");
 
             if (res.length() > 0) {
