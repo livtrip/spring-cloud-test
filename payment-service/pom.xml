@@ -54,23 +54,16 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/libs/yop-java-sdk-2.2.0.jar</systemPath>
         </dependency>
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>alipay-sdk-java</artifactId>
-			<version>java20170411150054</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/libs/alipay-sdk-java20170411150054.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>net.guerlab</groupId>
-			<artifactId>sdk-alipay-starter</artifactId>
-			<version>1.0.3</version>
-		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>1.2.61</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.javen205</groupId>
+			<artifactId>IJPay-All</artifactId>
+			<version>2.0.0</version>
 		</dependency>
 
 	</dependencies>

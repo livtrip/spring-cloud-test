@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @RestController
 @RequestMapping("/alipay/pay")
-@Api(tags = "1.4", description = "银行卡服务", value = "银行卡服务")
+@Api(tags = "1.5", description = "银行卡服务", value = "银行卡服务")
 @Slf4j
 public class AlipayController extends AlipayAbstractController {
 
