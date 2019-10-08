@@ -1,6 +1,5 @@
 package com.itmuch.cloud.study.payment.dao.impl;
 
-
 import com.itmuch.cloud.study.common.util.Page;
 import com.itmuch.cloud.study.common.util.PageUtil;
 import com.itmuch.cloud.study.payment.dao.PayLogDataDao;

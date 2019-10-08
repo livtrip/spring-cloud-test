@@ -29,6 +29,7 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_person" property="updatePerson" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -92,7 +93,7 @@
     id, app_id, pay_method_id, app_order_id, transaction_id, total_fee, scale, currency_code, 
     pay_channel, expire_time, return_url, notify_url, email, sing_type, intput_charset, 
     payment_time, notify_time, finish_time, trade_no, transaction_code, order_status, 
-    create_ip, update_ip, create_person, create_time, update_person, update_time
+    create_ip, update_ip, create_person, create_time, update_person, update_time, is_deleted
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itmuch.cloud.study.payment.entity.PayTransactionExample" >
     select
@@ -136,8 +137,8 @@
       payment_time, notify_time, finish_time, 
       trade_no, transaction_code, order_status, 
       create_ip, update_ip, create_person, 
-      create_time, update_person, update_time
-      )
+      create_time, update_person, update_time, 
+      is_deleted)
     values (#{id,jdbcType=BIGINT}, #{appId,jdbcType=VARCHAR}, #{payMethodId,jdbcType=INTEGER}, 
       #{appOrderId,jdbcType=VARCHAR}, #{transactionId,jdbcType=VARCHAR}, #{totalFee,jdbcType=INTEGER}, 
       #{scale,jdbcType=TINYINT}, #{currencyCode,jdbcType=VARCHAR}, #{payChannel,jdbcType=VARCHAR}, 
@@ -146,8 +147,8 @@
       #{paymentTime,jdbcType=TIMESTAMP}, #{notifyTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP}, 
       #{tradeNo,jdbcType=VARCHAR}, #{transactionCode,jdbcType=VARCHAR}, #{orderStatus,jdbcType=TINYINT}, 
       #{createIp,jdbcType=VARCHAR}, #{updateIp,jdbcType=VARCHAR}, #{createPerson,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+      #{createTime,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{isDeleted,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.itmuch.cloud.study.payment.entity.PayTransaction" >
     insert into tb_pay_transaction
@@ -233,6 +234,9 @@
       <if test="updateTime != null" >
         update_time,
       </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -315,6 +319,9 @@
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -408,6 +415,9 @@
       <if test="record.updateTime != null" >
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.isDeleted != null" >
+        is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -441,7 +451,8 @@
       create_person = #{record.createPerson,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_person = #{record.updatePerson,jdbcType=VARCHAR},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      is_deleted = #{record.isDeleted,jdbcType=TINYINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -527,6 +538,9 @@
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -557,7 +571,8 @@
       create_person = #{createPerson,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_person = #{updatePerson,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

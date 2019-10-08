@@ -58,6 +58,8 @@ public class PayTransaction implements Serializable {
 
     private Date updateTime;
 
+    private Byte isDeleted;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -276,6 +278,14 @@ public class PayTransaction implements Serializable {
         this.updateTime = updateTime;
     }
 
+    public Byte getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Byte isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -309,6 +319,7 @@ public class PayTransaction implements Serializable {
         sb.append(", createTime=").append(createTime);
         sb.append(", updatePerson=").append(updatePerson);
         sb.append(", updateTime=").append(updateTime);
+        sb.append(", isDeleted=").append(isDeleted);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
