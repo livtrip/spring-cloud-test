@@ -14,6 +14,8 @@ public class PayTransactionExtension implements Serializable {
 
     private Integer callNum;
 
+    private String extensionData;
+
     private String createPerson;
 
     private Date createTime;
@@ -23,8 +25,6 @@ public class PayTransactionExtension implements Serializable {
     private Date updateTime;
 
     private Byte isDeleted;
-
-    private String extensionData;
 
     private static final long serialVersionUID = 1L;
 
@@ -68,6 +68,14 @@ public class PayTransactionExtension implements Serializable {
         this.callNum = callNum;
     }
 
+    public String getExtensionData() {
+        return extensionData;
+    }
+
+    public void setExtensionData(String extensionData) {
+        this.extensionData = extensionData == null ? null : extensionData.trim();
+    }
+
     public String getCreatePerson() {
         return createPerson;
     }
@@ -108,14 +116,6 @@ public class PayTransactionExtension implements Serializable {
         this.isDeleted = isDeleted;
     }
 
-    public String getExtensionData() {
-        return extensionData;
-    }
-
-    public void setExtensionData(String extensionData) {
-        this.extensionData = extensionData == null ? null : extensionData.trim();
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -127,12 +127,12 @@ public class PayTransactionExtension implements Serializable {
         sb.append(", payMethodId=").append(payMethodId);
         sb.append(", transactionCode=").append(transactionCode);
         sb.append(", callNum=").append(callNum);
+        sb.append(", extensionData=").append(extensionData);
         sb.append(", createPerson=").append(createPerson);
         sb.append(", createTime=").append(createTime);
         sb.append(", updatePerson=").append(updatePerson);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", isDeleted=").append(isDeleted);
-        sb.append(", extensionData=").append(extensionData);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

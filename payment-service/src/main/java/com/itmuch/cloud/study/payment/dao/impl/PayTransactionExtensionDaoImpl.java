@@ -36,7 +36,7 @@ public class PayTransactionExtensionDaoImpl implements PayTransactionExtensionDa
     }
 
     public int updateByPrimaryKey(PayTransactionExtension record) {
-        return this.payTransactionExtensionMapper.updateByPrimaryKeyWithoutBLOBs(record);
+        return this.payTransactionExtensionMapper.updateByPrimaryKey(record);
     }
 
     public int updateByExampleSelective(PayTransactionExtension record, PayTransactionExtensionExample example) {
@@ -44,11 +44,11 @@ public class PayTransactionExtensionDaoImpl implements PayTransactionExtensionDa
     }
 
     public int updateByExample(PayTransactionExtension record, PayTransactionExtensionExample example) {
-        return this.payTransactionExtensionMapper.updateByExampleWithoutBLOBs(record, example);
+        return this.payTransactionExtensionMapper.updateByExample(record, example);
     }
 
     public List<PayTransactionExtension> listByExample(PayTransactionExtensionExample example) {
-        return this.payTransactionExtensionMapper.selectByExampleWithoutBLOBs(example);
+        return this.payTransactionExtensionMapper.selectByExample(example);
     }
 
     public PayTransactionExtension getById(Long id) {

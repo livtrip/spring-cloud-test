@@ -445,6 +445,76 @@ public class PayTransactionExtensionExample {
             return (Criteria) this;
         }
 
+        public Criteria andExtensionDataIsNull() {
+            addCriterion("extension_data is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtensionDataIsNotNull() {
+            addCriterion("extension_data is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtensionDataEqualTo(String value) {
+            addCriterion("extension_data =", value, "extensionData");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtensionDataNotEqualTo(String value) {
+            addCriterion("extension_data <>", value, "extensionData");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtensionDataGreaterThan(String value) {
+            addCriterion("extension_data >", value, "extensionData");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtensionDataGreaterThanOrEqualTo(String value) {
+            addCriterion("extension_data >=", value, "extensionData");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtensionDataLessThan(String value) {
+            addCriterion("extension_data <", value, "extensionData");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtensionDataLessThanOrEqualTo(String value) {
+            addCriterion("extension_data <=", value, "extensionData");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtensionDataLike(String value) {
+            addCriterion("extension_data like", value, "extensionData");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtensionDataNotLike(String value) {
+            addCriterion("extension_data not like", value, "extensionData");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtensionDataIn(List<String> values) {
+            addCriterion("extension_data in", values, "extensionData");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtensionDataNotIn(List<String> values) {
+            addCriterion("extension_data not in", values, "extensionData");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtensionDataBetween(String value1, String value2) {
+            addCriterion("extension_data between", value1, value2, "extensionData");
+            return (Criteria) this;
+        }
+
+        public Criteria andExtensionDataNotBetween(String value1, String value2) {
+            addCriterion("extension_data not between", value1, value2, "extensionData");
+            return (Criteria) this;
+        }
+
         public Criteria andCreatePersonIsNull() {
             addCriterion("create_person is null");
             return (Criteria) this;

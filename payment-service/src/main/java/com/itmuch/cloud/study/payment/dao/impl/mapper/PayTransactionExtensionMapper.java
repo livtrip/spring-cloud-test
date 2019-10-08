@@ -18,21 +18,15 @@ public interface PayTransactionExtensionMapper {
 
     int insertSelective(PayTransactionExtension record);
 
-    List<PayTransactionExtension> selectByExampleWithBLOBs(PayTransactionExtensionExample example);
-
     List<PayTransactionExtension> selectByExample(PayTransactionExtensionExample example);
 
     PayTransactionExtension selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") PayTransactionExtension record, @Param("example") PayTransactionExtensionExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") PayTransactionExtension record, @Param("example") PayTransactionExtensionExample example);
-
     int updateByExample(@Param("record") PayTransactionExtension record, @Param("example") PayTransactionExtensionExample example);
 
     int updateByPrimaryKeySelective(PayTransactionExtension record);
-
-    int updateByPrimaryKeyWithBLOBs(PayTransactionExtension record);
 
     int updateByPrimaryKey(PayTransactionExtension record);
 }
