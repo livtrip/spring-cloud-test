@@ -47,13 +47,13 @@
 		</dependency>
 
         <!--易宝支付-->
-        <dependency>
-            <groupId>yeepay</groupId>
-            <artifactId>yop-java-sdk</artifactId>
-            <version>2.2.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/libs/yop-java-sdk-2.2.0.jar</systemPath>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>yeepay</groupId>-->
+<!--            <artifactId>yop-java-sdk</artifactId>-->
+<!--            <version>2.2.0</version>-->
+<!--			<scope>system</scope>-->
+<!--			<systemPath>${project.basedir}/libs/yop-java-sdk-2.2.0.jar</systemPath>-->
+<!--        </dependency>-->
 		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -74,9 +74,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<includeSystemScope>true</includeSystemScope>
-				</configuration>
+<!--				<configuration>-->
+<!--					<includeSystemScope>true</includeSystemScope>-->
+<!--				</configuration>-->
 			</plugin>
 
 			<!-- 添加docker-maven插件 -->
@@ -105,43 +105,43 @@
 					<target>8</target>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.3.1</version>
-				<configuration>
-					<archive>
-						<!-- 生成的jar中，不要包含pom.xml和pom.properties这两个文件 -->
-						<addMavenDescriptor>false</addMavenDescriptor>
-						<manifest>
-							<mainClass>com.itmuch.cloud.study.payment.PaymentApplication</mainClass>
-							<useUniqueVersions>false</useUniqueVersions>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>libs/</classpathPrefix>
-						</manifest>
-						<manifestEntries>
-							<Class-Path>. libs/yop-java-sdk-2.2.0.jar</Class-Path>
-						</manifestEntries>
-					</archive>
-				</configuration>
+<!--			<plugin>-->
+<!--				<groupId>org.apache.maven.plugins</groupId>-->
+<!--				<artifactId>maven-jar-plugin</artifactId>-->
+<!--				<version>2.3.1</version>-->
+<!--				<configuration>-->
+<!--					<archive>-->
+<!--						&lt;!&ndash; 生成的jar中，不要包含pom.xml和pom.properties这两个文件 &ndash;&gt;-->
+<!--						<addMavenDescriptor>false</addMavenDescriptor>-->
+<!--						<manifest>-->
+<!--							<mainClass>com.itmuch.cloud.study.payment.PaymentApplication</mainClass>-->
+<!--							<useUniqueVersions>false</useUniqueVersions>-->
+<!--							<addClasspath>true</addClasspath>-->
+<!--							<classpathPrefix>libs/</classpathPrefix>-->
+<!--						</manifest>-->
+<!--						<manifestEntries>-->
+<!--							<Class-Path>. libs/yop-java-sdk-2.2.0.jar</Class-Path>-->
+<!--						</manifestEntries>-->
+<!--					</archive>-->
+<!--				</configuration>-->
 
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<includeScope>system</includeScope>
-					<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/lib</outputDirectory>
-				</configuration>
-			</plugin>
+<!--			</plugin>-->
+<!--			<plugin>-->
+<!--				<groupId>org.apache.maven.plugins</groupId>-->
+<!--				<artifactId>maven-dependency-plugin</artifactId>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<phase>package</phase>-->
+<!--						<goals>-->
+<!--							<goal>copy-dependencies</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--				<configuration>-->
+<!--					<includeScope>system</includeScope>-->
+<!--					<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/lib</outputDirectory>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 

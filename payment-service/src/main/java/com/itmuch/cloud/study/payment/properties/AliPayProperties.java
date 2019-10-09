@@ -1,4 +1,4 @@
-package com.itmuch.cloud.study.payment.config;
+package com.itmuch.cloud.study.payment.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "alipay")
 @Data
-public class AliPayConfig {
+public class AliPayProperties {
 
     private String appId;
 
