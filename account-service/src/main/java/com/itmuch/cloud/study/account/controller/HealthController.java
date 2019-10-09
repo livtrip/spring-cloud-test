@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Api(tags = "1.9", description = "健康服务", value = "健康服务")
 public class HealthController {
-    @GetMapping("/health")
+    @GetMapping("/test")
     public String health(){
+        System.out.println("come here...");
         return "ok";
     }
 }
